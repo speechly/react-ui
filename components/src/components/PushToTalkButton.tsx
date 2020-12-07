@@ -26,6 +26,11 @@ export type PushToTalkButtonProps = {
    * Valid input is an array of two hex colour codes, e.g. `['#fff', '#000']`.
    */
   gradientStops?: string[]
+
+  /**
+   * Drag start event
+   */
+  onDragStart?: () => void
 }
 
 /**
@@ -39,6 +44,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   captureKey,
   size = '6.0rem',
   gradientStops = ['#15e8b5', '#4fa1f9'],
+  onDragStart = () => {},
 }) => {
   const { speechState, toggleRecording, initialise } = useSpeechContext()
   const [tangentButtonState, buttonDispatch] = useReducer(buttonReducer, ButtonDefaultState)
@@ -64,13 +70,10 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     // Speechly & Mic initialise needs to be here (a function triggered by event handler), otherwise it won't work reliably on Safari iOS as of 11/2020
     vibrate()
 
-    console.log(speechState)
     if (isStartButtonVisible(speechState)) {
       setSpringProps({ holdScale: 1.35, config: { tension: 500 } })
 
-      console.log('initialising')
       await initialise()
-      console.log('initialised')
     } else {
       setSpringProps({
         reset: false,
@@ -78,6 +81,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
         holdScale: 1.35,
         config: { tension: 500 },
       })
+      onDragStart();
 
       await micStart()
     }
@@ -116,7 +120,6 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   }
 
   const micStart = useCallback(async () => {
-    console.log('micstarting')
     switch (speechState) {
       case SpeechState.Idle:
       case SpeechState.Recording:
@@ -125,7 +128,6 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     }
 
     await toggleRecording()
-    console.log('micstarted')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
