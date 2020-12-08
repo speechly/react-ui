@@ -82,7 +82,7 @@ const TransscriptItem: React.FC<{ entityType: string | null }> = props => {
   })
 
   return (
-    <TransscriptItemDiv className={props.entityType ? `Entity ${props.entityType}` : ``}>
+    <TransscriptItemDiv className={props.entityType !== null ? `Entity ${props.entityType}` : ''}>
       <TransscriptItemBgDiv style={springProps} />
       <TransscriptItemContent
         style={{
