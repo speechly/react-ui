@@ -53,7 +53,10 @@ export const BigTranscript: React.FC = props => {
 
   // Combine words of same type into HTML element snippets
   return (
-    <BigTranscriptDiv className="BigTranscript" style={{ opacity: (springProps.effectOpacity as unknown) as number }}>
+    <BigTranscriptDiv
+      className="BigTranscript"
+      style={{ opacity: springProps.effectOpacity.interpolate(x => x as number) }}
+    >
       {words.map<React.ReactNode>((w, index) => {
         const key = `${segment.contextId}/${segment.id}/${index}`
         return (
@@ -79,7 +82,7 @@ const TransscriptItem: React.FC<{ entityType: string | null }> = props => {
   })
 
   return (
-    <TransscriptItemDiv className={`${props.entityType === undefined ? 'Entity' : ''} ${props.entityType ?? ''}`}>
+    <TransscriptItemDiv className={props.entityType !== null ? `Entity ${props.entityType}` : ''}>
       <TransscriptItemBgDiv style={springProps} />
       <TransscriptItemContent
         style={{
