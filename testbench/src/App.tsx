@@ -5,6 +5,7 @@ import {
   BigTranscriptContainer,
   PushToTalkButton,
   PushToTalkButtonContainer,
+  ErrorPanel,
 //} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
 } from "./@speechly/react-ui";
@@ -22,6 +23,7 @@ export default function App() {
         <SpeechlyApp />
         <PushToTalkButtonContainer>
           <PushToTalkButton captureKey=" " onDragStart={() => console.log("Drag started")}/>
+          <ErrorPanel/>
         </PushToTalkButtonContainer>
       </SpeechProvider>
     </div>
