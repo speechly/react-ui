@@ -12,7 +12,9 @@ import {
 } from "react-spring";
 import { useKeyboardEvent } from "../hooks/useKeyboardEvent";
 import { SpeechState, useSpeechContext } from "@speechly/react-client";
+import PubSub from 'pubsub-js'
 import styled, { keyframes, css } from "styled-components";
+import { SpeechlyUiEvents } from '../types';
 
 /**
  * Properties for PushToTalkButton component.
@@ -166,6 +168,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
       let animateButtonToReleaseState = false;
 
       if (tangentButtonState.processEvent) {
+        PubSub.publish(SpeechlyUiEvents.TangentClick, {state: speechState});
         if (!tangentButtonState.mouseDrag) {
           vibrate();
           animateButtonToReleaseState = true;
