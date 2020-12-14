@@ -52,6 +52,13 @@ const P = styled.p`
 
 const HttpsRequired = "HttpsRequired";
 
+const isLocalHost = (hostname: string) =>
+  !!(
+    hostname === "localhost" ||
+    hostname === "[::1]" ||
+    hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+  );
+
 export const ErrorPanel: React.FC = props => {
   const [ visible, setVisible ] = useState<string | null>(null);
 
@@ -60,7 +67,7 @@ export const ErrorPanel: React.FC = props => {
       switch (payload.state) {
         case SpeechState.NoAudioConsent:
         case SpeechState.NoBrowserSupport:
-          if (window?.location?.protocol === "http:") {
+          if (window?.location?.protocol === "http:" && !isLocalHost(window.location.hostname)) {
             setVisible(HttpsRequired);
             break;
           }
@@ -84,10 +91,12 @@ export const ErrorPanel: React.FC = props => {
           <ErrorRight>
             <H1>No Mic Permission</H1>
             <P>
-              To use the voice interface, please allow your web browser access the microphone.
+              To use the voice interface, please allow your web browser access the microphone and reload.
             </P>
             <P>
               <a href="https://docs.speechly.com/faq/#why-do-i-get-mic-consent-denied-error-in-the-playground-why-doesnt-my-microphone-work-in-the-playground">Troubleshooting</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a href={window.location.href}>Reload</a>
             </P>
           </ErrorRight>
         }
