@@ -22,7 +22,7 @@ export default function App() {
         </BigTranscriptContainer>
         <SpeechlyApp />
         <PushToTalkButtonContainer>
-          <PushToTalkButton captureKey=" " onDragStart={() => console.log("Drag started")}/>
+          <PushToTalkButton captureKey=" "/>
           <ErrorPanel/>
         </PushToTalkButtonContainer>
       </SpeechProvider>
