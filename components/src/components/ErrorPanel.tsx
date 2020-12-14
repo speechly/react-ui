@@ -15,6 +15,7 @@ const ErrorDiv = styled.div`
   pointer-events: all;
   color: black;
   display: flex;
+  box-shadow: 0 0 8px #00000040;
   flex-direction: row;
 `;
 
@@ -48,6 +49,10 @@ const P = styled.p`
   margin: 0;
   padding: 0 0 0.5rem 0;
   color: #999;
+`;
+
+const A = styled.a`
+  color: #000;
 `;
 
 const HttpsRequired = "HttpsRequired";
@@ -94,9 +99,9 @@ export const ErrorPanel: React.FC = props => {
               To use the voice interface, please allow your web browser access the microphone and reload.
             </P>
             <P>
-              <a href="https://docs.speechly.com/faq/#why-do-i-get-mic-consent-denied-error-in-the-playground-why-doesnt-my-microphone-work-in-the-playground">Troubleshooting</a>
+              <A href="https://docs.speechly.com/faq/#why-do-i-get-mic-consent-denied-error-in-the-playground-why-doesnt-my-microphone-work-in-the-playground">Troubleshooting</A>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <a href={window.location.href}>Reload</a>
+              <A href={window.location.href}>Reload</A>
             </P>
           </ErrorRight>
         }
@@ -107,7 +112,7 @@ export const ErrorPanel: React.FC = props => {
               To use the voice interface, please visit this site using a supported browser.
             </P>
             <P>
-              <a href="https://docs.speechly.com/faq/#the-microphone-doesnt-work-on-ios-and-mobile-safari">Troubleshooting</a>
+              <A href="https://docs.speechly.com/faq/#the-microphone-doesnt-work-on-ios-and-mobile-safari">Troubleshooting</A>
             </P>
           </ErrorRight>
         }
@@ -118,9 +123,9 @@ export const ErrorPanel: React.FC = props => {
               To use the voice interface, please visit this site using the secure https:// protocol.
             </P>
             <P>
-              <a href="https://docs.speechly.com/faq/#http-unsupported">Troubleshooting</a>
+              <A href="https://docs.speechly.com/faq/#http-unsupported">Troubleshooting</A>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <a href={window.location.href.replace(/^http(?!s)/, "https")}>Try with HTTPS</a>
+              <A href={window.location.href.replace(/^http(?!s)/, "https")}>Try with HTTPS</A>
             </P>
           </ErrorRight>
         }
