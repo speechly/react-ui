@@ -1,3 +1,3 @@
 export enum SpeechlyUiEvents {
-  TangentClick = "TangentClick",
+  TangentClick = 'TangentClick',
 };
