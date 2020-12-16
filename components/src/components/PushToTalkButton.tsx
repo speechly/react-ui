@@ -1,8 +1,20 @@
-import React, { useEffect, useCallback, SyntheticEvent, useReducer } from 'react'
-import { useSpring, animated, interpolate, OpaqueInterpolation } from 'react-spring'
+import React, {
+  useEffect,
+  useCallback,
+  SyntheticEvent,
+  useReducer,
+} from 'react'
+import {
+  useSpring,
+  animated,
+  interpolate,
+  OpaqueInterpolation,
+} from 'react-spring'
 import { useKeyboardEvent } from '../hooks/useKeyboardEvent'
 import { SpeechState, useSpeechContext } from '@speechly/react-client'
+import PubSub from 'pubsub-js'
 import styled, { keyframes, css } from 'styled-components'
+import { SpeechlyUiEvents } from '../types'
 
 /**
  * Properties for PushToTalkButton component.
@@ -41,7 +53,10 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   gradientStops = ['#15e8b5', '#4fa1f9'],
 }) => {
   const { speechState, toggleRecording, initialise } = useSpeechContext()
-  const [tangentButtonState, buttonDispatch] = useReducer(buttonReducer, ButtonDefaultState)
+  const [tangentButtonState, buttonDispatch] = useReducer(
+    buttonReducer,
+    ButtonDefaultState,
+  )
 
   const [springProps, setSpringProps] = useSpring(() => ({
     holdScale: 1,
@@ -64,13 +79,14 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     // Speechly & Mic initialise needs to be here (a function triggered by event handler), otherwise it won't work reliably on Safari iOS as of 11/2020
     vibrate()
 
-    console.log(speechState)
     if (isStartButtonVisible(speechState)) {
       setSpringProps({ holdScale: 1.35, config: { tension: 500 } })
 
-      console.log('initialising')
-      await initialise()
-      console.log('initialised')
+      try {
+        await initialise()
+      } catch (err) {
+        console.error('Error initiasing Speechly', err)
+      }
     } else {
       setSpringProps({
         reset: false,
@@ -116,7 +132,6 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   }
 
   const micStart = useCallback(async () => {
-    console.log('micstarting')
     switch (speechState) {
       case SpeechState.Idle:
       case SpeechState.Recording:
@@ -125,7 +140,6 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     }
 
     await toggleRecording()
-    console.log('micstarted')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
@@ -147,6 +161,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
       let animateButtonToReleaseState = false
 
       if (tangentButtonState.processEvent) {
+        PubSub.publish(SpeechlyUiEvents.TangentClick, { state: speechState })
         if (!tangentButtonState.mouseDrag) {
           vibrate()
           animateButtonToReleaseState = true
@@ -170,7 +185,9 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
       }
     }
 
-    handle().catch(err => console.error('Error handling tangent release', err))
+    handle().catch((err) =>
+      console.error('Error handling tangent release', err),
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tangentButtonState, speechState])
 
@@ -178,9 +195,6 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     switch (state) {
       case SpeechState.Idle:
       case SpeechState.Connecting:
-      case SpeechState.Failed:
-      case SpeechState.NoAudioConsent:
-      case SpeechState.NoBrowserSupport:
         return true
     }
     return false
@@ -188,7 +202,8 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   // Track document mouseup to reliably release the mic if user drags outside button area.
   React.useEffect(() => {
-    const handleMouseUp = (): void => buttonDispatch({ type: TangentEvents.Cancel })
+    const handleMouseUp = (): void =>
+      buttonDispatch({ type: TangentEvents.Cancel })
     document.addEventListener('mouseup', handleMouseUp)
 
     return () => {
@@ -200,21 +215,36 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     <MicWidgetDiv
       size={size}
       style={{
-        transform: interpolate([springProps.holdScale as OpaqueInterpolation<number>], h => {
-          return `scale(${h})`
-        }),
+        transform: interpolate(
+          [springProps.holdScale as OpaqueInterpolation<number>],
+          (h) => {
+            return `scale(${h})`
+          },
+        ),
       }}
     >
-      <animated.div style={{ opacity: springProps.effectOpacity as OpaqueInterpolation<number> }}>
+      <animated.div
+        style={{
+          opacity: springProps.effectOpacity as OpaqueInterpolation<number>,
+        }}
+      >
         <MicFx gradientStops={gradientStops} />
       </animated.div>
       {!isStartButtonVisible(speechState) && (
-        <MicButton onMouseDown={onTangentButtonPress} onMouseUp={onTangentButtonRelease} gradientStops={gradientStops}>
+        <MicButton
+          onMouseDown={onTangentButtonPress}
+          onMouseUp={onTangentButtonRelease}
+          gradientStops={gradientStops}
+        >
           <MicIcon state={speechState} />
         </MicButton>
       )}
       {isStartButtonVisible(speechState) && (
-        <MicButton onMouseDown={onTangentButtonPress} onMouseUp={onTangentButtonRelease} gradientStops={gradientStops}>
+        <MicButton
+          onMouseDown={onTangentButtonPress}
+          onMouseUp={onTangentButtonRelease}
+          gradientStops={gradientStops}
+        >
           <PowerIcon state={speechState} />
         </MicButton>
       )}
@@ -222,7 +252,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   )
 }
 
-const MicFx: React.FC<{ gradientStops: string[] }> = props => {
+const MicFx: React.FC<{ gradientStops: string[] }> = (props) => {
   return (
     <MicFxSvg viewBox="0 0 246 246" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -230,11 +260,25 @@ const MicFx: React.FC<{ gradientStops: string[] }> = props => {
           <stop stopColor={props.gradientStops[0]} offset="0%" />
           <stop stopColor={props.gradientStops[1]} offset="100%" />
         </linearGradient>
-        <filter x="-35%" y="-35%" width="170%" height="170%" filterUnits="objectBoundingBox" id="b">
+        <filter
+          x="-35%"
+          y="-35%"
+          width="170%"
+          height="170%"
+          filterUnits="objectBoundingBox"
+          id="b"
+        >
           <feGaussianBlur stdDeviation="18" in="SourceGraphic" />
         </filter>
       </defs>
-      <circle filter="url(#b)" cx="124" cy="124" r="79" fill="url(#a)" fillRule="evenodd" />
+      <circle
+        filter="url(#b)"
+        cx="124"
+        cy="124"
+        r="79"
+        fill="url(#a)"
+        fillRule="evenodd"
+      />
     </MicFxSvg>
   )
 }
@@ -244,7 +288,7 @@ const MicButton: React.FC<{
   onMouseDown?: (e: SyntheticEvent) => void
   onMouseUp?: (e: SyntheticEvent) => void
   gradientStops: string[]
-}> = props => {
+}> = (props) => {
   return (
     <StyledMicButton
       onClick={props.onClick}
@@ -255,7 +299,10 @@ const MicButton: React.FC<{
       onDragStart={props.onMouseDown}
       onDragEnd={props.onMouseUp}
     >
-      <StyledButtonFrameSvg viewBox="0 0 92 92" xmlns="http://www.w3.org/2000/svg">
+      <StyledButtonFrameSvg
+        viewBox="0 0 92 92"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
           <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
             <stop stopColor={props.gradientStops[0]} offset="0%" />
@@ -278,20 +325,61 @@ const MicButton: React.FC<{
   )
 }
 
-const MicIcon: React.FC<{ state: string }> = props => {
-  return (
-    <MicIconSvg state={props.state} viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#000" fillRule="evenodd">
-        <path d="M42 26h4v4c0 9.265-7 16.895-16 17.89V55h-4v-7.11c-8.892-.982-15.833-8.444-15.997-17.56L10 30v-4h4v4c0 7.732 6.268 14 14 14 7.628 0 13.83-6.1 13.997-13.687L42 30v-4z" />
-        <rect x="20" y="1" width="16" height="37" rx="8" />
-      </g>
-    </MicIconSvg>
-  )
+const MicIcon: React.FC<{ state: string }> = (props) => {
+  switch (props.state) {
+    case SpeechState.Failed:
+    case SpeechState.NoBrowserSupport:
+      return (
+        <MicIconSvg
+          state={props.state}
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g fill="#000" fillRule="evenodd">
+            <path
+              d="M42 26h4v4c0 9.265-7 16.895-16 17.89V55h-4v-7.11c-8.892-.982-15.833-8.444-15.997-17.56L10 30v-4h4v4c0 7.732 6.268 14 14 14 7.628 0 13.83-6.1 13.997-13.687L42 30v-4z"
+              fillRule="nonzero"
+            />
+            <path d="M37 13.081V31a8 8 0 11-16 0v-1.919l16-16zM26 1a8 8 0 018 8v1.319L18 26.318V9a8 8 0 018-8zM37.969 7.932l3.74-7.35 3.018 2.625zM39.654 10.608l7.531-3.359.695 3.94z" />
+          </g>
+        </MicIconSvg>
+      )
+    case SpeechState.NoAudioConsent:
+      return (
+        <MicIconSvg
+          state={props.state}
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g fill="#000" fillRule="nonzero">
+            <path d="M36 14.828V30a8 8 0 01-15.961.79l15.96-15.962zM28 1a8 8 0 018 8v.172L20 25.173V9a8 8 0 018-8z" />
+            <path d="M42 26h4v4c0 9.265-7 16.895-16 17.89V55h-4v-7.11c-8.892-.982-15.833-8.444-15.997-17.56L10 30v-4h4v4c0 7.732 6.268 14 14 14 7.628 0 13.83-6.1 13.997-13.687L42 30v-4z" />
+          </g>
+        </MicIconSvg>
+      )
+    default:
+      return (
+        <MicIconSvg
+          state={props.state}
+          viewBox="0 0 56 56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g fill="#000" fillRule="evenodd">
+            <path d="M42 26h4v4c0 9.265-7 16.895-16 17.89V55h-4v-7.11c-8.892-.982-15.833-8.444-15.997-17.56L10 30v-4h4v4c0 7.732 6.268 14 14 14 7.628 0 13.83-6.1 13.997-13.687L42 30v-4z" />
+            <rect x="20" y="1" width="16" height="37" rx="8" />
+          </g>
+        </MicIconSvg>
+      )
+  }
 }
 
-const PowerIcon: React.FC<{ state: string }> = props => {
+const PowerIcon: React.FC<{ state: string }> = (props) => {
   return (
-    <MicIconSvg state={props.state} viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <MicIconSvg
+      state={props.state}
+      viewBox="0 0 56 56"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g fill="#000" fillRule="evenodd">
         <path
           d="M52 28c0 13.255-10.745 24-24 24S4 41.255 4 28c0-8.921 4.867-16.705 12.091-20.842l1.984 3.474C12.055 14.08 8 20.566 8 28c0 11.046 8.954 20 20 20s20-8.954 20-20c0-7.434-4.056-13.92-10.075-17.368L39.91 7.16C47.133 11.296 52 19.079 52 28z"
@@ -325,8 +413,8 @@ const MicOpacityPulseKeys = keyframes`
 `
 
 const MicWidgetDiv = styled(animated.div)<{ size: string }>`
-  width: ${props => props.size};
-  height: ${props => props.size};
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
   position: relative;
 `
 
@@ -368,7 +456,7 @@ const MicIconSvg = styled.svg<{ state: string }>`
   transform: translate(-50%, -50%);
   pointer-events: none;
   transition: 0.25s;
-  ${props => {
+  ${(props) => {
     switch (props.state) {
       case SpeechState.Idle:
         return css`

@@ -31,6 +31,7 @@
     "url": "https://github.com/speechly/react-ui/issues"
   },
   "devDependencies": {
+    "@types/pubsub-js": "^1.8.1",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "^5.1.4",
@@ -58,14 +59,15 @@
     "webpack-cli": "^4.2.0"
   },
   "peerDependencies": {
+    "@speechly/react-client": "^0.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "@speechly/react-client": "^0.0.3",
     "react-spring": "^8.0.27",
     "styled-components": "^5.2.1"
   },
   "dependencies": {
-    "@speechly/react-client": "^0.0.3",
+    "@speechly/react-client": "^0.0.4",
+    "pubsub-js": "^1.9.2",
     "react-spring": "^8.0.27",
     "styled-components": "^5.2.1"
   },

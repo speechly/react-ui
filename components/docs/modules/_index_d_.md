@@ -10,6 +10,7 @@
 
 * [BigTranscript](_index_d_.md#bigtranscript)
 * [BigTranscriptContainer](_index_d_.md#bigtranscriptcontainer)
+* [ErrorPanel](_index_d_.md#errorpanel)
 * [PushToTalkButton](_index_d_.md#pushtotalkbutton)
 * [PushToTalkButtonContainer](_index_d_.md#pushtotalkbuttoncontainer)
 * [PushToTalkButtonProps](_index_d_.md#pushtotalkbuttonprops)
@@ -25,6 +26,12 @@ ___
 ### BigTranscriptContainer
 
 Re-exports: [BigTranscriptContainer](_components_bigtranscriptcontainer_d_.md#bigtranscriptcontainer)
+
+___
+
+### ErrorPanel
+
+Re-exports: [ErrorPanel](_components_errorpanel_d_.md#errorpanel)
 
 ___
 

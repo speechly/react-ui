@@ -5,9 +5,10 @@ import {
   BigTranscriptContainer,
   PushToTalkButton,
   PushToTalkButtonContainer,
-} from "@speechly/react-ui";
+  ErrorPanel,
+//} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
-// } from "./@speechly/react-ui";
+} from "./@speechly/react-ui";
 
 export default function App() {
   const appId = process.env.REACT_APP_APP_ID ?? "define-your-app-id-here";
@@ -21,7 +22,8 @@ export default function App() {
         </BigTranscriptContainer>
         <SpeechlyApp />
         <PushToTalkButtonContainer>
-          <PushToTalkButton captureKey=" " />
+          <PushToTalkButton captureKey=" "/>
+          <ErrorPanel/>
         </PushToTalkButtonContainer>
       </SpeechProvider>
     </div>
