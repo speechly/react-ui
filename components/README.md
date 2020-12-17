@@ -2,13 +2,19 @@
 
 The sources are used to build Speechly React UI Components package.
 
+## Install dependencies
+npm install --save @speechly/react-client
+npm install --save react-spring
+npm install --save styled-components @types/styled-components
+npm install --save pubsub-js @types/pubsub-js
+
 ## Using speechly components directly in a project
 
 ```
 cd <~/git/react-ui>
 export SPEECHLY_REACT_UI_PATH=`pwd`
 cd <~/git/my/other/speechly/project>
-$SPEECHLY_REACT_UI_PATH/use-speechly-react-ui.sh
+$SPEECHLY_REACT_UI_PATH/link-react-ui.sh
 ```
 
 This will create a link from `src/speechly` in the current project to Speechly react-ui's `components/src`.

@@ -21,11 +21,6 @@ create-react-app .
 
 # Install the package
 npm install --save @speechly/react-ui
-
-# Install peer dependencies
-npm install --save @speechly/react-client
-npm install --save react-spring
-npm install --save styled-components @types/styled-components
 ```
 
 ## Usage
@@ -44,14 +39,15 @@ The component has been tested with Chrome on desktop (version 86), Chrome on And
 
 ```tsx
 import { SpeechProvider } from "@speechly/react-client";
-import { PushToTalkButton, PushToTalkContainer } from "@speechly/react-ui";
+import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from "@speechly/react-ui";
 
 function AppView() {
   return (
     <SpeechProvider appId="speechly-app-id" language="speechly-app-language">
-      <PushToTalkContainer>
+      <PushToTalkButtonContainer>
         <PushToTalkButton captureKey=" " />
-      </PushToTalkContainer>
+        <ErrorPanel/>
+      </PushToTalkButtonContainer>
     </SpeechProvider>
   );
 }
@@ -62,6 +58,7 @@ function AppView() {
 - Mic widget size is defined by `size` property. Parameters are in css, e.g. `6rem`.
 - Colors are defined by `gradientStops` property. Parameter is an array of 2 colors, e.g. ["#","#"].
 - If you created the app skeleton using the react-client tutorial, you may wish to remove the following lines containing the default button for toggling speech recording:
+- `<ErrorPanel/>` is an optional component that is intended to be placed inside `<PushToTalkButtonContainer/>`. You may, however, place it anywhere in the component hierarchy. It automatically shows if there is problem detected upon pressing the `<PushToTalkButton/>`.
 
 ```tsx
 <div className="mic-button">
@@ -100,6 +97,10 @@ Styling like colors can be assigned to `.BigTranscript` container class and to d
   font-family: "Organetto";
   font-size: 1.4rem;
   line-height: 1.15;
+}
+
+.BigTranscript .Entity {
+  color: #909090;
 }
 
 .BigTranscript .Entity.room {
