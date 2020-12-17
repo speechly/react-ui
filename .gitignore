@@ -18,3 +18,9 @@ temp/
 
 # Ignore IDE configs
 .vscode/
+
+# Envs
+**/.env
+
+# Helper scripts
+link-react-ui.sh
