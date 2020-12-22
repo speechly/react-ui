@@ -79,7 +79,7 @@ export const ErrorPanel: React.FC = (props) => {
 
   useEffect(() => {
     const subTangentClick = PubSub.subscribe(
-      SpeechlyUiEvents.TangentClick,
+      SpeechlyUiEvents.TangentRelease,
       (message: string, payload: { state: SpeechState }) => {
         switch (payload.state) {
           case SpeechState.NoAudioConsent:
