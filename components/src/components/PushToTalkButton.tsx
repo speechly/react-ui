@@ -140,7 +140,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
-  const setPressedAppearance = (pressed: boolean) => {
+  const setPressedAppearance = (pressed: boolean): void => {
     if (pressed) {
       setSpringProps({
         reset: false,
@@ -162,15 +162,17 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     switch (speechState) {
       case SpeechState.Ready:
         // Put button in resting state. Also do this on SpeechState.Ready as we may not get the keyboard up press due to permission prompt
-        setPressedAppearance(false);
-        break;
+        setPressedAppearance(false)
+        break
     }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
   const tangentReleaseActions = useCallback(async (timeMs: number) => {
     PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechState, timeMs })
 
-    setPressedAppearance(false);
+    setPressedAppearance(false)
 
     switch (speechState) {
       case SpeechState.Idle:
@@ -230,46 +232,46 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
       size={size}
     >
 
-    <HintCallout/>
+      <HintCallout/>
 
-    <MicWidgetDiv
-      size={size}
-      style={{
-        transform: interpolate(
-          [springProps.holdScale as OpaqueInterpolation<number>],
-          (h) => {
-            return `scale(${h})`
-          },
-        ),
-      }}
-    >
-
-      <animated.div
+      <MicWidgetDiv
+        size={size}
         style={{
-          opacity: springProps.effectOpacity as OpaqueInterpolation<number>,
+          transform: interpolate(
+            [springProps.holdScale as OpaqueInterpolation<number>],
+            (h) => {
+              return `scale(${h})`
+            },
+          ),
         }}
       >
-        <MicFx gradientStops={gradientStops} />
-      </animated.div>
-      {!isStartButtonVisible(speechState) && (
-        <MicButton
-          onMouseDown={onTangentButtonPress}
-          onMouseUp={onTangentButtonRelease}
-          gradientStops={gradientStops}
+
+        <animated.div
+          style={{
+            opacity: springProps.effectOpacity as OpaqueInterpolation<number>,
+          }}
         >
-          <MicIcon state={speechState} />
-        </MicButton>
-      )}
-      {isStartButtonVisible(speechState) && (
-        <MicButton
-          onMouseDown={onTangentButtonPress}
-          onMouseUp={onTangentButtonRelease}
-          gradientStops={gradientStops}
-        >
-          <PowerIcon state={speechState} />
-        </MicButton>
-      )}
-    </MicWidgetDiv>
+          <MicFx gradientStops={gradientStops} />
+        </animated.div>
+        {!isStartButtonVisible(speechState) && (
+          <MicButton
+            onMouseDown={onTangentButtonPress}
+            onMouseUp={onTangentButtonRelease}
+            gradientStops={gradientStops}
+          >
+            <MicIcon state={speechState} />
+          </MicButton>
+        )}
+        {isStartButtonVisible(speechState) && (
+          <MicButton
+            onMouseDown={onTangentButtonPress}
+            onMouseUp={onTangentButtonRelease}
+            gradientStops={gradientStops}
+          >
+            <PowerIcon state={speechState} />
+          </MicButton>
+        )}
+      </MicWidgetDiv>
     </MicContainerDiv>
   )
 }
