@@ -21,9 +21,9 @@ export const HintCallout: React.FC = props => {
         console.log('TangentRelease ', payload.state, payload.timeMs)
         if (payload.state === SpeechState.Recording && payload.timeMs < 350) {
           if (timeout.current === null) {
-            timeout.current = setTimeout(() => {
+            timeout.current = window.setTimeout(() => {
               setVisible(true)
-              timeout.current = setTimeout(() => {
+              timeout.current = window.setTimeout(() => {
                 setVisible(false)
                 timeout.current = null
               }, 3000)
