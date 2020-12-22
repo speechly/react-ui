@@ -11,15 +11,15 @@ export const HintCallout: React.FC = props => {
     const subTangentPress = PubSub.subscribe(
       SpeechlyUiEvents.TangentPress,
       (message: string, payload: { state: SpeechState }) => {
-        console.log("Clear pending")
+        // console.log("TangentPress")
         hideHints();
       },
     )
     const subTangentClick = PubSub.subscribe(
       SpeechlyUiEvents.TangentRelease,
       (message: string, payload: { state: SpeechState, timeMs: number }) => {
+        //console.log("TangentRelease ", payload.state, payload.timeMs)
         if (payload.state === SpeechState.Recording && payload.timeMs < 350) {
-          console.log("Set pending")
           if (timeout.current === null) {
               timeout.current = setTimeout(() => {
               setVisible(true);
