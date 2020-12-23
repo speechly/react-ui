@@ -106,14 +106,8 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
         break
 
       case SpeechState.Ready:
-        setPressedAppearance(true);
-        (async () => {
-          try {
-            await toggleRecording()
-          } catch (err) {
-            console.error('Error while starting to record', err)
-          }
-        })()
+        setPressedAppearance(true)
+        toggleRecording().catch(err => console.error('Error while starting to record', err))
         break
       default:
         break
@@ -121,7 +115,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
-  const tangentReleaseAction = useCallback(async (timeMs: number) => {
+  const tangentReleaseAction = useCallback((timeMs: number) => {
     PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechState, timeMs })
 
     setPressedAppearance(false)
@@ -129,21 +123,13 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     switch (speechState) {
       case SpeechState.Idle:
       case SpeechState.Failed:
-        try {
-          // Speechly & Mic initialise needs to be in a function triggered by event handler
-          // otherwise it won't work reliably on Safari iOS as of 11/2020
-          await initialise()
-        } catch (err) {
-          console.error('Error initiasing Speechly', err)
-        }
+        // Speechly & Mic initialise needs to be in a function triggered by event handler
+        // otherwise it won't work reliably on Safari iOS as of 11/2020
+        initialise().catch(err => console.error('Error initiasing Speechly', err))
         break
       case SpeechState.Recording:
       default:
-        try {
-          await toggleRecording()
-        } catch (err) {
-          console.error('Error while stopping recording', err)
-        }
+        toggleRecording().catch(err => console.error('Error while stopping recording', err))
         break
     }
 
