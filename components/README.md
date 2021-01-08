@@ -46,3 +46,24 @@ cd npm-test
 create-react-app .
 npm install ../components/react-ui-*.tgz
 ```
+
+## Publishing npm package
+
+```
+# Make sure you have `np` installed:
+npm i -g np
+# Push new release
+# DO NOT create the release on GitHub yet - you can close the page
+cd components/
+np --no-publish
+# Sadly `np` cannot properly push a commit when not in repo root
+git add .
+git commit -m "Publish $VERSION" # Replace $VERSION with proper version name
+git push
+# Now push a tag
+git tag $VERSION # Replace $VERSION with proper version name
+git push origin $VERSION
+# Now go back to GitHub, open tags list and create a release for your newly published tag
+# You can copy-paste description from release created by `np`
+# Name the release the same as tag
+```
