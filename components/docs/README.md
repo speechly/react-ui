@@ -10,7 +10,9 @@
 
 * ["components/BigTranscript.d"](modules/_components_bigtranscript_d_.md)
 * ["components/BigTranscriptContainer.d"](modules/_components_bigtranscriptcontainer_d_.md)
+* ["components/Callout.d"](modules/_components_callout_d_.md)
 * ["components/ErrorPanel.d"](modules/_components_errorpanel_d_.md)
+* ["components/HintCallout.d"](modules/_components_hintcallout_d_.md)
 * ["components/PushToTalkButton.d"](modules/_components_pushtotalkbutton_d_.md)
 * ["components/PushToTalkContainer.d"](modules/_components_pushtotalkcontainer_d_.md)
 * ["hooks/useKeyboardEvent.d"](modules/_hooks_usekeyboardevent_d_.md)
