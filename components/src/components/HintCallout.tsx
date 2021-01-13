@@ -29,15 +29,15 @@ export const HintCallout: React.FC = props => {
             case SpeechState.Ready:
             case SpeechState.Recording:
             case SpeechState.Loading:
-                if (timeout.current === null) {
-              timeout.current = window.setTimeout(() => {
-                setVisible(true)
+              if (timeout.current === null) {
                 timeout.current = window.setTimeout(() => {
-                  setVisible(false)
-                  timeout.current = null
-                }, INSTRUCTION_SHOW_TIME_MS)
-              }, INSTRUCTION_PREROLL_MS)
-            }
+                  setVisible(true)
+                  timeout.current = window.setTimeout(() => {
+                    setVisible(false)
+                    timeout.current = null
+                  }, INSTRUCTION_SHOW_TIME_MS)
+                }, INSTRUCTION_PREROLL_MS)
+              }
           }
         }
       },
