@@ -6,6 +6,7 @@ node_modules/
 
 # Ignore distribution code.
 dist/
+/lib
 
 # Ignore ESLint cache
 .eslintcache
@@ -22,5 +23,3 @@ temp/
 # Envs
 **/.env
 
-# Helper scripts
-link-react-ui.sh
