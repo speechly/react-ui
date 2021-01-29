@@ -9,7 +9,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./components
+    working-directory: ./
 
 jobs:
   build:

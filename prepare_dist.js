@@ -51,5 +51,5 @@ const distPackageJson =
 fs.writeFileSync(`${destDir}/package.json`, distPackageJson)
 
 // Copy supporting files into "dist"
-fs.copyFileSync(`${srcDir}/../README.md`, `${destDir}/README.md`)
-fs.copyFileSync(`${srcDir}/../LICENSE`, `${destDir}/LICENSE`)
+fs.copyFileSync(`${srcDir}/README.md`, `${destDir}/README.md`)
+fs.copyFileSync(`${srcDir}/LICENSE`, `${destDir}/LICENSE`)
