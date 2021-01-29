@@ -7,7 +7,7 @@ if [ -z "$SPEECHLY_REACT_UI_PATH" ]
     exit 1
 fi
 
-HARDLINK_SOURCE=$SPEECHLY_REACT_UI_PATH/components/src
+HARDLINK_SOURCE=$SPEECHLY_REACT_UI_PATH/src
 # /Users/arzga/Documents/Speechly/git/react-ui/components/src/components
 HARDLINK_DEST=src/@speechly/react-ui/
 
