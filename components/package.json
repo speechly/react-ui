@@ -1,7 +1,7 @@
 {
   "name": "@speechly/react-ui",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Speechly UI Components",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -59,14 +59,14 @@
     "webpack-cli": "^4.2.0"
   },
   "peerDependencies": {
-    "@speechly/react-client": "^0.0.4",
+    "@speechly/react-client": "^0.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-spring": "^8.0.27",
     "styled-components": "^5.2.1"
   },
   "dependencies": {
-    "@speechly/react-client": "^0.0.4",
+    "@speechly/react-client": "0.0.5",
     "pubsub-js": "^1.9.2",
     "react-spring": "^8.0.27",
     "styled-components": "^5.2.1"
