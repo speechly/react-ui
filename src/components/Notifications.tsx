@@ -1,24 +1,82 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import styled from 'styled-components'
 import { Info } from './Info'
+import { SpeechlyUiEvents } from '../types'
+
+export enum NotificationType {
+  warning = "warning",
+}
+
+export type NotificationItem = {
+  type: NotificationType,
+  message: string,
+  footnote?: string,
+  visible: boolean,
+}
 
 export const Notifications: React.FC = props => {
-  const { speechState } = useSpeechContext()
+  const [ audioQualityNotification, setAudioQualityNotification ] = useState<NotificationItem | null>(
+    {
+      type: NotificationType.warning,
+      message: "Bad audio. Please say again.",
+      visible: true,
+    }
+  );
+
+  const [ utteranceFeedback, setUtteranceFeedback ] = useState<NotificationItem | null>(
+    {
+      type: NotificationType.warning,
+      message: "Could not find 'Good vibes pants'",
+      footnote: "Try: 'Sneakers'",
+      visible: true,
+    }
+  );
+
+  useEffect(() => {
+    const subTangentPress = PubSub.subscribe(
+      SpeechlyUiEvents.TangentPress,
+      (message: string, payload: { state: SpeechState }) => {
+        hideHints()
+      },
+    )
+    return () => {
+      PubSub.unsubscribe(subTangentPress)
+    }
+  }, [])
+
+  const hideHints = (): void => {
+    setUtteranceFeedback(prev => prev ? {...prev, visible: false} : null);
+    setAudioQualityNotification(prev => prev ? {...prev, visible: false} : null);
+  }
 
   return (
     <>
-      <Info visible={speechState === SpeechState.Idle}>
-        <WarningIcon/>Bad audio. Please say again.
+      <Info visible={audioQualityNotification?.visible || false}>
+        <WarningIcon/>
+        <div>
+          {audioQualityNotification?.message}
+          {audioQualityNotification?.footnote && <>
+            <br/>
+            <small>{audioQualityNotification?.footnote}</small>
+          </>}
+        </div>
       </Info>
       <Info visible={true}>
         <WarningIcon/>Sorry, all we hear is silence.
       </Info>
-      <Info visible={true}>
+      <Info visible={utteranceFeedback?.visible || false}>
         <WarningIcon/><div>Please say again<br/><small>Try: "Sneakers"</small></div>
       </Info>
-      <Info visible={true}>
-        <WarningIcon/><div>Could not find 'Good vibes pants'<br/><small>Try: "Sneakers"</small></div>
+      <Info visible={utteranceFeedback?.visible || false}>
+        <WarningIcon/>
+        <div>
+          {utteranceFeedback?.message}
+          {utteranceFeedback?.footnote && <>
+            <br/>
+            <small>{utteranceFeedback?.footnote}</small>
+          </>}
+        </div>
       </Info>
     </>
   )
