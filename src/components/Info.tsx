@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import { useSpring, animated, config } from 'react-spring'
 import styled from 'styled-components'
 import { SpeechlyUiEvents } from '../types'
@@ -7,7 +6,7 @@ import { SpeechlyUiEvents } from '../types'
 type InfoProps = {
   visible: boolean;
   color: string;
-  backgroundColor: string;
+  backgroundcolor: string;
 }
 
 export const Info: React.FC<InfoProps> = props => {
@@ -52,7 +51,7 @@ export const Info: React.FC<InfoProps> = props => {
       className="Warning"
       style={springProps}
     >
-      <InfoItemBgDiv backgroundColor={props.backgroundColor}/>
+      <InfoItemBgDiv backgroundcolor={props.backgroundcolor}/>
       <InfoItemContent color={props.color}>
         {props.children}
       </InfoItemContent>
@@ -75,13 +74,13 @@ const InfoItemContent = styled(animated.div)`
   align-items: center;
 `
 
-const InfoItemBgDiv = styled(animated.div)<{backgroundColor: string}>`
+const InfoItemBgDiv = styled(animated.div)<{backgroundcolor: string}>`
   position: absolute;
   box-sizing: content-box;
   width: 100%;
   height: 100%;
   margin: -0.5rem;
   padding: 0.5rem;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.backgroundcolor};
   z-index: -1;
 `

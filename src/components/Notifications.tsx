@@ -102,7 +102,7 @@ export const Notifications: React.FC = props => {
   return (
     <>
     {notification?.type === NotificationType.info && (
-      <Info visible={notification?.visible || false} color="#fff" backgroundColor="#46c">
+      <Info visible={notification?.visible || false} color="#fff" backgroundcolor="#46c">
         <InfoIcon color="#fff"/>
         <div>
           {notification?.message}
@@ -114,7 +114,7 @@ export const Notifications: React.FC = props => {
       </Info>
     )}
     {notification?.type === NotificationType.warning && (
-      <Info visible={notification?.visible || false} color="#000" backgroundColor="#fc0">
+      <Info visible={notification?.visible || false} color="#000" backgroundcolor="#fc0">
         <WarningIcon color="#000"/>
         <div>
           {notification?.message}
@@ -131,7 +131,7 @@ export const Notifications: React.FC = props => {
 
 const InfoIcon: React.FC<{color: string}> = (props) => {
   return (
-    <IconSvg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill={props.color} fill-rule="evenodd"><path d="M12 1.5c5.799 0 10.5 4.701 10.5 10.5S17.799 22.5 12 22.5 1.5 17.799 1.5 12 6.201 1.5 12 1.5zM12 3a9 9 0 100 18 9 9 0 000-18z"/><path fill-rule="nonzero" d="M13 10v8h-2v-6.5h-1V10z"/><circle cx="11.75" cy="7.5" r="1.5"/></g></IconSvg>
+    <IconSvg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill={props.color} fillRule="evenodd"><path d="M12 1.5c5.799 0 10.5 4.701 10.5 10.5S17.799 22.5 12 22.5 1.5 17.799 1.5 12 6.201 1.5 12 1.5zM12 3a9 9 0 100 18 9 9 0 000-18z"/><path fillRule="nonzero" d="M13 10v8h-2v-6.5h-1V10z"/><circle cx="11.75" cy="7.5" r="1.5"/></g></IconSvg>
   )
 }
 
