@@ -10,28 +10,42 @@ export enum NotificationType {
 
 export type NotificationItem = {
   type: NotificationType,
+  notificationId: string,
   message: string,
   footnote?: string,
   visible: boolean,
 }
 
-export const Notifications: React.FC = props => {
-  const [ audioQualityNotification, setAudioQualityNotification ] = useState<NotificationItem | null>(
-    {
-      type: NotificationType.warning,
-      message: "Bad audio. Please say again.",
-      visible: true,
-    }
-  );
+let NotificationId: number = 0
 
-  const [ utteranceFeedback, setUtteranceFeedback ] = useState<NotificationItem | null>(
+export const Notifications: React.FC = props => {
+
+  const [ notification, setNotification ] = useState<NotificationItem | null>(null);
+
+  /*
     {
       type: NotificationType.warning,
       message: "Could not find 'Good vibes pants'",
       footnote: "Try: 'Sneakers'",
       visible: true,
     }
-  );
+    {
+      type: NotificationType.warning,
+      message: "Bad audio. Please say again.",
+      visible: true,
+    },
+    {
+      type: NotificationType.warning,
+      message: "Sorry, all we hear is silence.",
+      visible: true,
+    },
+    {
+      type: NotificationType.warning,
+      message: "Please say again",
+      footnote: 'Try: "Sneakers"',
+      visible: true,
+    }
+  */
 
   useEffect(() => {
     const subTangentPress = PubSub.subscribe(
@@ -40,45 +54,47 @@ export const Notifications: React.FC = props => {
         hideHints()
       },
     )
+    const subDismiss = PubSub.subscribe(
+      SpeechlyUiEvents.DismissNotification,
+      (message: string, payload: { state: SpeechState }) => {
+        hideHints()
+      },
+    )
+    const subNotification = PubSub.subscribe(
+      SpeechlyUiEvents.WarningNotification,
+      (message: string, payload: { message: string, footnote?: string }) => {
+        setNotification(
+        {
+          type: NotificationType.warning,
+          notificationId: `msg-${NotificationId++}`,
+          message: payload.message,
+          footnote: payload.footnote,
+          visible: true,
+        });
+      },
+    )
     return () => {
-      PubSub.unsubscribe(subTangentPress)
+      PubSub.unsubscribe(subTangentPress);
+      PubSub.unsubscribe(subNotification);
+      PubSub.unsubscribe(subDismiss);
     }
   }, [])
 
   const hideHints = (): void => {
-    setUtteranceFeedback(prev => prev ? {...prev, visible: false} : null);
-    setAudioQualityNotification(prev => prev ? {...prev, visible: false} : null);
+    setNotification(prev => prev ? {...prev, visible: false} : null);
   }
 
   return (
-    <>
-      <Info visible={audioQualityNotification?.visible || false}>
-        <WarningIcon/>
-        <div>
-          {audioQualityNotification?.message}
-          {audioQualityNotification?.footnote && <>
-            <br/>
-            <small>{audioQualityNotification?.footnote}</small>
-          </>}
-        </div>
-      </Info>
-      <Info visible={true}>
-        <WarningIcon/>Sorry, all we hear is silence.
-      </Info>
-      <Info visible={utteranceFeedback?.visible || false}>
-        <WarningIcon/><div>Please say again<br/><small>Try: "Sneakers"</small></div>
-      </Info>
-      <Info visible={utteranceFeedback?.visible || false}>
-        <WarningIcon/>
-        <div>
-          {utteranceFeedback?.message}
-          {utteranceFeedback?.footnote && <>
-            <br/>
-            <small>{utteranceFeedback?.footnote}</small>
-          </>}
-        </div>
-      </Info>
-    </>
+    <Info visible={notification?.visible || false}>
+      <WarningIcon/>
+      <div>
+        {notification?.message}
+        {notification?.footnote && <>
+          <br/>
+          <small>{notification?.footnote}</small>
+        </>}
+      </div>
+    </Info>
   )
 }
 

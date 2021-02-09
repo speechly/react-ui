@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import { useSpring, animated, config } from 'react-spring'
 import styled from 'styled-components'
+import { SpeechlyUiEvents } from '../types'
 
 type InfoProps = {
   visible: boolean;
@@ -45,7 +46,7 @@ export const Info: React.FC<InfoProps> = props => {
   }, [props.visible])
 
   return (
-    <InfoDiv
+    <InfoDiv onClick={() => PubSub.publish(SpeechlyUiEvents.DismissNotification)}
       className="Warning"
       style={springProps}
     >
