@@ -6,6 +6,8 @@ import { SpeechlyUiEvents } from '../types'
 
 type InfoProps = {
   visible: boolean;
+  color: string;
+  backgroundColor: string;
 }
 
 export const Info: React.FC<InfoProps> = props => {
@@ -46,41 +48,20 @@ export const Info: React.FC<InfoProps> = props => {
   }, [props.visible])
 
   return (
-    <InfoDiv onClick={() => PubSub.publish(SpeechlyUiEvents.DismissNotification)}
+    <InfoItemDiv onClick={() => PubSub.publish(SpeechlyUiEvents.DismissNotification)}
       className="Warning"
       style={springProps}
     >
-      <InfoItem>{props.children}</InfoItem>
-    </InfoDiv>
-  )
-}
-
-const InfoItem: React.FC = props => {
-  const [springProps] = useSpring(() => ({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { tension: 500 },
-  }))
-
-  return (
-    <InfoItemDiv>
-      <InfoItemBgDiv style={springProps} />
-      <InfoItemContent
-        style={{
-          ...springProps,
-        }}
-      >
+      <InfoItemBgDiv backgroundColor={props.backgroundColor}/>
+      <InfoItemContent color={props.color}>
         {props.children}
       </InfoItemContent>
     </InfoItemDiv>
   )
 }
 
-const InfoDiv = styled(animated.div)`
-  user-select: none;
-`
-
 const InfoItemDiv = styled(animated.div)`
+  user-select: none;
   position: relative;
   display: inline-block;
 `
@@ -88,19 +69,19 @@ const InfoItemDiv = styled(animated.div)`
 const InfoItemContent = styled(animated.div)`
   z-index: 1;
   font-size: 1.2rem;
-  color: #000;
+  // color: #000;
   display: flex;
   flex-direction: row;
   align-items: center;
 `
 
-const InfoItemBgDiv = styled(animated.div)`
+const InfoItemBgDiv = styled(animated.div)<{backgroundColor: string}>`
   position: absolute;
   box-sizing: content-box;
   width: 100%;
   height: 100%;
   margin: -0.5rem;
   padding: 0.5rem;
-  background-color: #fc0;
+  background-color: ${(props) => props.backgroundColor};
   z-index: -1;
 `

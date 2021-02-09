@@ -1,7 +1,7 @@
 export enum SpeechlyUiEvents {
   TangentRelease = 'TangentRelease',
   TangentPress = 'TangentPress',
-  InfoNotification = 'InfoNotification',
+  Notification = 'Notification',
   WarningNotification = 'WarningNotification',
   DismissNotification = 'DismissNotification',
 };
