@@ -4,18 +4,18 @@ import styled from 'styled-components'
 import { SpeechlyUiEvents } from '../types'
 
 type InfoProps = {
-  visible: boolean;
-  color: string;
-  backgroundcolor: string;
+  visible: boolean
+  color: string
+  backgroundcolor: string
 }
 
 export const Info: React.FC<InfoProps> = props => {
   const [springProps, setSpringProps] = useSpring(() => ({
     to: {
       opacity: 0,
-      maxHeight: "0rem",
-      marginTop: "0rem",
-    }
+      maxHeight: '0rem',
+      marginTop: '0rem',
+    },
   }))
 
   useEffect(() => {
@@ -23,10 +23,10 @@ export const Info: React.FC<InfoProps> = props => {
       setSpringProps({
         to: async (next: any, cancel: any) => {
           await next({
-            maxHeight: "10rem",
-            marginTop: "1.5rem",
+            maxHeight: '10rem',
+            marginTop: '1.5rem',
             opacity: 1,
-          });
+          })
         },
         config: config.stiff,
       })
@@ -35,15 +35,16 @@ export const Info: React.FC<InfoProps> = props => {
         to: async (next: any, cancel: any) => {
           await next({
             opacity: 0,
-          });
+          })
           await next({
-            maxHeight: "0rem",
-            marginTop: "0rem",
-          });
+            maxHeight: '0rem',
+            marginTop: '0rem',
+          })
         },
         config: config.stiff,
       })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.visible])
 
   return (

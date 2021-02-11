@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 /**
  * Properties for BigTranscriptContainer component.
@@ -10,17 +10,17 @@ export type BigTranscriptContainerProps = {
   /**
    * The override value for CSS position (default: `"fixed"`).
    */
-  position?: string;
+  position?: string
 
   /**
    * The override value for CSS margin(default: `"3rem 2rem 0 2rem"`).
    */
-  margin?: string;
-};
+  margin?: string
+}
 
 const BigTranscriptContainerDiv = styled.div<{
-  position: string;
-  margin: string;
+  position: string
+  margin: string
 }>`
   position: ${(props) => props.position};
   margin: ${(props) => props.margin};
@@ -28,7 +28,7 @@ const BigTranscriptContainerDiv = styled.div<{
 
   color: #fff;
   font-size: 1.4rem;
-`;
+`
 
 /**
  * A React component that can be used for wrapping and positioning BigTranscript components.
@@ -45,13 +45,13 @@ const BigTranscriptContainerDiv = styled.div<{
  */
 
 export const BigTranscriptContainer: React.FC<BigTranscriptContainerProps> = ({
-  position = "fixed",
-  margin = "3rem 2rem 0 2rem",
+  position = 'fixed',
+  margin = '3rem 2rem 0 2rem',
   children,
 }) => {
   return (
     <BigTranscriptContainerDiv position={position} margin={margin}>
       {children}
     </BigTranscriptContainerDiv>
-  );
-};
+  )
+}
