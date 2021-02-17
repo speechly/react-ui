@@ -19,16 +19,18 @@ Complete your touch user interface with voice
 
 ## Contents
 
-- [Installation](installation)
-- [Usage](usage)
-- [PushToTalkButton component](push-to-talk-button-component)
-- [BigTranscript component](bigtranscript-component)
-- [ErrorPanel component](errorpanel-component)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [PushToTalkButton component](#-push-to-talk-button-component)
+- [BigTranscript component](#-bigtranscript-component)
+- [ErrorPanel component](#-errorpanel-component)
 
 ## Installation
 
+Create a React app (if starting from scratch), then install the required packages:
+
 ```sh
-# Create a new React app
+# Create a new React app in current folder
 create-react-app .
 
 # Install react-ui and react-client dependency
@@ -36,13 +38,22 @@ npm install --save @speechly/react-client
 npm install --save @speechly/react-ui
 ```
 
-### Usage
+## Usage
 
-Import the files for required components:
+Import the required components (e.g. in `App.jsx`):
 
 ```tsx
-import { SpeechProvider } from "@speechly/react-client";
-import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel, BigTranscript, BigTranscriptContainer } from "@speechly/react-ui";
+import {
+  SpeechProvider
+} from "@speechly/react-client";
+
+import {
+  PushToTalkButton,
+  PushToTalkButtonContainer,
+  BigTranscript,
+  BigTranscriptContainer,
+  ErrorPanel
+} from "@speechly/react-ui";
 ```
 
 Place the components inside your `<SpeechProvider>` block since they depend on the context hook it provides.
