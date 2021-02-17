@@ -81,7 +81,7 @@ Replace the `speechly-app-id` with the one for your trained speech model from [S
 
 `<PushToTalkButton/>` is a holdable button to control listening for voice input. The icon on the button shows the voice system state.
 
-The Push-to-Talk button is intended to be placed as a floating button at the lower part of the screen using `<PushToTalkButtonContainer/>` so mobile users can react it with ease.
+The Push-to-Talk button is intended to be placed as a floating button at the lower part of the screen using `<PushToTalkButtonContainer/>` so mobile users can reach it with ease.
 
 Desktop users can control it with an optional keyboard hotkey. Our hotkey recommendation is the spacebar.
 
@@ -93,15 +93,15 @@ The placement, size and colors of the button can be customised.
 
 ### States
 
-1. Initial state (Power-on icon): Pressing the button initialises the Speechly API and may trigger the browser microphone permission prompt.
+1. **Offline** (Power-on icon): Pressing the button initialises the Speechly API and may trigger the browser's microphone permission prompt.
 
-2. Ready (Mic icon). Waiting for user to press and hold the button to start listening.
+2. **Ready** (Mic icon). Waiting for user to press and hold the button to start listening.
 
-3. Listening (Highlighted mic). This state is displayed when the component is being held down and Speechly listens for audio input.
+3. **Listening** (Highlighted mic). This state is displayed when the component is being held down and Speechly listens for audio input.
 
-4. Receiving transcript (Pulsating mic). This state may be briefly displayed when the button is released and Speechly finalizes the stream of results.
+4. **Receiving transcript** (Pulsating mic). This state may be briefly displayed when the button is released and Speechly finalizes the stream of results.
 
-5. Error (Broken mic icon). In case of an error (usually during initialisation), the button turns into a broken mic symbol. If you have the optional `<ErrorPanel/>` component in your hierarchy, a description of the problem is displayed. Otherwise, you'll need to look into the browser console to discover the reason for the error.
+5. **Error** (Broken mic icon). In case of an error (usually during initialisation), the button turns into a broken mic symbol. If you have the optional `<ErrorPanel/>` component in your hierarchy, a description of the problem is displayed. Otherwise, you'll need to look into the browser console to discover the reason for the error.
 
 ### Customisation
 
