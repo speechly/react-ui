@@ -46,7 +46,7 @@ Place the components inside your `<SpeechProvider>` block since they depend on t
 ```tsx
 function App() {
   return (
-    <SpeechProvider appId="speechly-app-id" language="en-US">
+    <SpeechProvider appId="014ce3a6-9bbf-4605-976f-087a8f3ec178" language="en-US">
       <BigTranscriptContainer>
         <BigTranscript />
       </BigTranscriptContainer>
@@ -60,7 +60,13 @@ function App() {
 }
 ```
 
-Replace the `speechly-app-id` with the one for your trained speech model from [Speechly Dashboard](https://speechly.com/dashboard).
+To test it, run the app with `npm start`. If you used the default `appId` (Home Automation Demo), hold the push-to-talk button and try saying "Turn off the lights in the kitchen".
+
+If you have already trained your own custom speech model, replace the `appId` with your own acquired from [Speechly Dashboard](https://speechly.com/dashboard).
+
+### Further reading
+
+- [Handling Speech Input in a React App in Speechly Blog](https://www.speechly.com/blog/handling-speech-input-in-a-react-app/)
 
 ## Push-to-Talk Button component
 
