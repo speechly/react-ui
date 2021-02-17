@@ -4,11 +4,11 @@
 
 ## Contents
 
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [PushToTalkButton component](#-push-to-talk-button-component)
-- [BigTranscript component](#-bigtranscript-component)
-- [ErrorPanel component](#-errorpanel-component)
+- [Installation](#installation)
+- [Usage](#usage)
+- [PushToTalkButton component](#push-to-talk-button-component)
+- [BigTranscript component](#bigtranscript-component)
+- [ErrorPanel component](#errorpanel-component)
 
 ## Installation
 
