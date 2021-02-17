@@ -15,7 +15,7 @@ menu:
 
 ## Introduction
 
-`@speechly/react-ui` package is an optional component library for speeding up voice-enabled web app development using React and Speechly.
+`@speechly/react-ui` package is an optional UI component library for speeding up voice-enabled web app development using React and Speechly.
 
 ## Contents
 
