@@ -72,7 +72,9 @@ Desktop users can control it with an optional keyboard hotkey. Our hotkey recomm
 
 The placement, size and colors of the button can be customised.
 
-> Use `<PushToTalkButton/>` to let users turn listening for voice input on and off
+  >
+  > Use `<PushToTalkButton/>` to let users turn listening for voice input on and off
+  >
 
 ### States
 
@@ -110,7 +112,9 @@ It is intended to be placed as an overlay near top-left corner of the screen wit
 
 The placement, typography and colors of the button can be customised. Recognized entities are tagged with css classes so they can be styled individually.
 
-> Use `<BigTranscript/>` to display real-time speech-to-text transcript for better feedback
+  >
+  > Use `<BigTranscript/>` to display real-time speech-to-text transcript for better feedback
+  >
 
 ### Customisation
 
@@ -145,4 +149,6 @@ Styling like colors can be assigned to `.BigTranscript` container class and to d
 
 It automatically shows if there is problem detected upon pressing the `<PushToTalkButton/>`. Internally, it uses `pubsub-js` for component to component communication.
 
-> Use `<ErrorPanel/>` to help users diagnose and recover from voice-related issues
+  >
+  > Use `<ErrorPanel/>` to help users diagnose and recover from voice-related issues
+  >
