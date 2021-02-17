@@ -1,17 +1,17 @@
-<h1 align="center">
-<a href="https://www.speechly.com/?utm_source=github&utm_medium=react-ui&utm_campaign=header"><img src="https://www.speechly.com/images/logo.png" height="100" alt="Speechly"></a>
-</h1>
-<h2 align="center">
-Complete your touch user interface with voice
-</h2>
+---
+title: Speechly React UI components
+description: Ready-made UI components for React apps
+display: article
+menu:
+  integrations:
+    title: UI components
+    weight: 2
+    parent: Speechly React client
+---
 
-[Speechly website](https://www.speechly.com/?utm_source=github&utm_medium=react-ui&utm_campaign=header)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Docs](https://www.speechly.com/docs/?utm_source=github&utm_medium=react-client&utm_campaign=header)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Blog](https://www.speechly.com/blog/?utm_source=github&utm_medium=react-client&utm_campaign=header)
+{{< button "https://github.com/speechly/react-ui" "logo-github" "light" "GitHub" >}}
 
-# Speechly React UI components
-
-![Release build](https://github.com/speechly/react-ui/workflows/Release%20build/badge.svg)
-[![npm version](https://badge.fury.io/js/%40speechly%2Freact-ui.svg)](https://badge.fury.io/js/%40speechly%2Freact-ui)
-[![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE)
+&nbsp;
 
 ## Introduction
 
@@ -144,24 +144,3 @@ Styling like colors can be assigned to `.BigTranscript` container class and to d
 `<ErrorPanel/>` is intended to be placed inside `<PushToTalkButtonContainer>` block. You may, however, place it anywhere in the component hierarchy.
 
 It automatically shows if there is problem detected upon pressing the `<PushToTalkButton/>`. Internally, it uses `pubsub-js` for component to component communication.
-
-## Documentation
-
-You can find the detailed API documentation in [GitHub repository](https://github.com/speechly/react-ui/blob/master/docs/modules/_index_d_.md).
-
-## About Speechly
-
-Speechly is a developer tool for building real-time multimodal voice user interfaces. It enables developers and designers to enhance their current touch user interface with voice functionalities for better user experience. Speechly key features:
-
-#### Speechly key features
-
-- Fully streaming API
-- Multi modal from the ground up
-- Easy to configure for any use case
-- Fast to integrate to any touch screen application
-- Supports natural corrections such as "Show me red – i mean blue t-shirts"
-- Real time visual feedback encourages users to go on with their voice
-
-|                  Example application                  | Description                                                                                                                                                                                                                                                                                                                               |
-| :---------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://i.imgur.com/v9o1JHf.gif" width=50%> | Instead of using buttons, input fields and dropdowns, Speechly enables users to interact with the application by using voice. <br />User gets real-time visual feedback on the form as they speak and are encouraged to go on. If there's an error, the user can either correct it by using traditional touch user interface or by voice. |

@@ -1,0 +1,15 @@
+---
+title: Speechly React UI components
+description: Ready-made UI components for React apps
+display: article
+menu:
+  integrations:
+    title: UI components
+    weight: 2
+    parent: Speechly React client
+---
+
+{{< button "https://github.com/speechly/react-ui" "logo-github" "light" "GitHub" >}}
+
+&nbsp;
+
