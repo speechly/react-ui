@@ -87,6 +87,8 @@ Desktop users can control it with an optional keyboard hotkey. Our hotkey recomm
 
 The placement, size and colors of the button can be customised.
 
+> Use `<PushToTalkButton/>` to let users turn listening for voice input on and off
+
 ### States
 
 1. Initial state (Power-on icon): Pressing the button initialises the Speechly API and may trigger the browser microphone permission prompt.
@@ -123,6 +125,8 @@ It is intended to be placed as an overlay near top-left corner of the screen wit
 
 The placement, typography and colors of the button can be customised. Recognized entities are tagged with css classes so they can be styled individually.
 
+> Use `<BigTranscript/>` to display real-time speech-to-text transcript for better feedback
+
 ### Customisation
 
 Styling like colors can be assigned to `.BigTranscript` container class and to different entity types by using `.Entity.<EntityName>` selector. Replace `<EntityName>` with the exact entity name defined in your SAL.
@@ -155,6 +159,8 @@ Styling like colors can be assigned to `.BigTranscript` container class and to d
 `<ErrorPanel/>` is intended to be placed inside `<PushToTalkButtonContainer>` block. You may, however, place it anywhere in the component hierarchy.
 
 It automatically shows if there is problem detected upon pressing the `<PushToTalkButton/>`. Internally, it uses `pubsub-js` for component to component communication.
+
+> Use `<ErrorPanel/>` to help users diagnose and recover from voice-related issues
 
 ## Documentation
 
