@@ -14,7 +14,7 @@ export const Info: React.FC<InfoProps> = props => {
     to: {
       opacity: 0,
       maxHeight: '0rem',
-      marginTop: '0rem',
+      marginBottom: '0rem',
     },
   }))
 
@@ -24,7 +24,7 @@ export const Info: React.FC<InfoProps> = props => {
         to: async (next: any, cancel: any) => {
           await next({
             maxHeight: '10rem',
-            marginTop: '1.5rem',
+            marginBottom: '1.5rem',
             opacity: 1,
           })
         },
@@ -38,7 +38,7 @@ export const Info: React.FC<InfoProps> = props => {
           })
           await next({
             maxHeight: '0rem',
-            marginTop: '0rem',
+            marginBottom: '0rem',
           })
         },
         config: config.stiff,
@@ -63,7 +63,7 @@ export const Info: React.FC<InfoProps> = props => {
 const InfoItemDiv = styled(animated.div)`
   user-select: none;
   position: relative;
-  display: inline-block;
+  display: block;
 `
 
 const InfoItemContent = styled(animated.div)`

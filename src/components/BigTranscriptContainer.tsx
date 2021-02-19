@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Notifications } from './Notifications'
 
 /**
  * Properties for BigTranscriptContainer component.
@@ -51,6 +52,7 @@ export const BigTranscriptContainer: React.FC<BigTranscriptContainerProps> = ({
 }) => {
   return (
     <BigTranscriptContainerDiv position={position} margin={margin}>
+      <Notifications />
       {children}
     </BigTranscriptContainerDiv>
   )
