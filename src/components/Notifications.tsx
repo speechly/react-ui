@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SpeechState } from '@speechly/react-client'
+import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import styled from 'styled-components'
 import { Info } from './Info'
 import { SpeechlyUiEvents } from '../types'
@@ -20,6 +20,7 @@ export type NotificationItem = {
 let NotificationId: number = 0
 
 export const Notifications: React.FC = props => {
+  const { speechState } = useSpeechContext()
   const [notification, setNotification] = useState<NotificationItem | null>(null)
 
   /*
@@ -48,12 +49,6 @@ export const Notifications: React.FC = props => {
   */
 
   useEffect(() => {
-    const subTangentPress = PubSub.subscribe(
-      SpeechlyUiEvents.TangentPress,
-      (message: string, payload: { state: SpeechState }) => {
-        hideHints()
-      },
-    )
     const subDismiss = PubSub.subscribe(
       SpeechlyUiEvents.DismissNotification,
       (message: string, payload: { state: SpeechState }) => {
@@ -85,12 +80,19 @@ export const Notifications: React.FC = props => {
       },
     )
     return () => {
-      PubSub.unsubscribe(subTangentPress)
       PubSub.unsubscribe(subNotification)
       PubSub.unsubscribe(subWarningNotification)
       PubSub.unsubscribe(subDismiss)
     }
   }, [])
+
+  useEffect(() => {
+    switch(speechState) {
+      case SpeechState.Recording: {
+        hideHints();
+      }
+    }
+  }, [speechState])
 
   const hideHints = (): void => {
     setNotification(prev => (prev !== null ? { ...prev, visible: false } : null))
