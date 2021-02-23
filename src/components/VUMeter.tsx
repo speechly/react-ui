@@ -46,7 +46,6 @@ const VUMeter = () => {
     let VUTarget = 0
     let VUUpdateTimeStamp = 0
     let VULevels: number[] = [0, 0]
-    let VUScale: number[] = [1, 0.65]
     const numVUs = (VULevels.length - 1) * 2 + 1;
     const vuWidthWeight = 3;
     const vuGapWeight = 1;
