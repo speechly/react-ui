@@ -7,8 +7,6 @@ import React, {
 import {
   useSpring,
   animated,
-  interpolate,
-  OpaqueInterpolation,
 } from 'react-spring'
 import { useKeyboardEvent } from '../hooks/useKeyboardEvent'
 import { SpeechState, useSpeechContext } from '@speechly/react-client'
@@ -212,18 +210,15 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
       <MicWidgetDiv
         size={size}
         style={{
-          transform: interpolate(
-            [springProps.holdScale as OpaqueInterpolation<number>],
-            (h) => {
-              return `scale(${h})`
-            },
-          ),
+          transform: springProps.holdScale.interpolate(
+            (h) => `scale(${h})`
+          )
         }}
       >
 
         <animated.div
           style={{
-            opacity: springProps.effectOpacity as OpaqueInterpolation<number>,
+            opacity: springProps.effectOpacity.interpolate(x => x as string),
           }}
         >
           <MicFx gradientStops={gradientStops} />
@@ -243,7 +238,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
             onMouseUp={onTangentButtonRelease}
             gradientStops={gradientStops}
           >
-            <PowerIcon state={speechState} />
+            <PowerIcon state={speechState} gradientStops={gradientStops} />
           </MicButton>
         )}
       </MicWidgetDiv>
@@ -372,14 +367,15 @@ const MicIcon: React.FC<{ state: string }> = (props) => {
   }
 }
 
-const PowerIcon: React.FC<{ state: string }> = (props) => {
+const PowerIcon: React.FC<{ state: string, gradientStops: string[] }> = (props) => {
   return (
     <MicIconSvg
       state={props.state}
+      gradientStops={props.gradientStops}
       viewBox="0 0 56 56"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g fill="#000" fillRule="evenodd">
+      <g fill="currentColor" fillRule="evenodd">
         <path
           d="M52 28c0 13.255-10.745 24-24 24S4 41.255 4 28c0-8.921 4.867-16.705 12.091-20.842l1.984 3.474C12.055 14.08 8 20.566 8 28c0 11.046 8.954 20 20 20s20-8.954 20-20c0-7.434-4.056-13.92-10.075-17.368L39.91 7.16C47.133 11.296 52 19.079 52 28z"
           fillRule="nonzero"
@@ -408,6 +404,18 @@ const MicOpacityPulseKeys = keyframes`
   }
   100% {
     opacity: 0.1;
+  }
+`
+
+const MicStartKeys = (gradientStops: string[]) => keyframes`
+  25% {
+    color: #000000;
+  }
+  50% {
+    color: ${gradientStops[1]};
+  }
+  75% {
+    color: #000000;
   }
 `
 
@@ -452,7 +460,7 @@ const MicFxSvg = styled.svg`
   }
 `
 
-const MicIconSvg = styled.svg<{ state: string }>`
+const MicIconSvg = styled.svg<{ state: string, gradientStops?: string[] }>`
   width: auto;
   height: 60%;
   position: absolute;
@@ -465,7 +473,7 @@ const MicIconSvg = styled.svg<{ state: string }>`
     switch (props.state) {
       case SpeechState.Idle:
         return css`
-          animation: ${MicOpacityPulseKeys} 4.5s infinite;
+          animation: ${MicStartKeys(props.gradientStops!)} 4.5s infinite;
           transition: 0.25s;
         `
       case SpeechState.NoAudioConsent:

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { useSpeechContext } from '@speechly/react-client'
+import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import { useSpring, animated } from 'react-spring'
 import styled from 'styled-components'
+import VUMeter from './VUMeter'
 
 /**
  * A React component that renders the transcript and entities received from Speechly SLU API.
@@ -11,10 +12,11 @@ import styled from 'styled-components'
  * @public
  */
 export const BigTranscript: React.FC = props => {
-  const { segment } = useSpeechContext()
-  const [springProps, setSpringProps] = useSpring(() => ({
+  const { segment, speechState } = useSpeechContext()
+  const [ springProps, setSpringProps ] = useSpring(() => ({
+    reveal: 0,
     to: {
-      opacity: 0,
+      reveal: 0,
       maxHeight: '0rem',
       marginBottom: '0rem',
     },
@@ -25,7 +27,7 @@ export const BigTranscript: React.FC = props => {
       setSpringProps({
         to: async (next: any, cancel: any) => {
           await next({
-            opacity: 0,
+            reveal: 0,
           })
           await next({
             maxHeight: '0rem',
@@ -36,10 +38,16 @@ export const BigTranscript: React.FC = props => {
         config: { tension: 200 },
       })
     } else {
+    }
+  }, [segment, setSpringProps])
+
+  useEffect(() => {
+    if (speechState === SpeechState.Recording) {
+      console.log("Hoi hoi")
       setSpringProps({
         to: async (next: any, cancel: any) => {
           await next({
-            opacity: 1,
+            reveal: 1,
             maxHeight: '10rem',
             marginBottom: '1.5rem',
           })
@@ -47,25 +55,25 @@ export const BigTranscript: React.FC = props => {
         config: { tension: 500 },
       })
     }
-  }, [segment, setSpringProps])
-
-  if (segment === undefined) {
-    return <BigTranscriptDiv className="BigTranscript" />
-  }
+  }, [speechState])
 
   // Assign words to a new list with original index (segments.words array indices may not correlate with entity.startIndex)
   let words: ITaggedWord[] = []
-  segment.words.forEach(w => {
-    words[w.index] = { word: w.value, serialNumber: w.index, entityType: null, isFinal: w.isFinal }
-  })
 
-  // Tag words with entities
-  segment.entities.forEach(e => {
-    words.slice(e.startPosition, e.endPosition).forEach(w => {
-      w.entityType = e.type
-      w.isFinal = e.isFinal
+  if (segment !== undefined) {
+
+    segment.words.forEach(w => {
+      words[w.index] = { word: w.value, serialNumber: w.index, entityType: null, isFinal: w.isFinal }
     })
-  })
+
+    // Tag words with entities
+    segment.entities.forEach(e => {
+      words.slice(e.startPosition, e.endPosition).forEach(w => {
+        w.entityType = e.type
+        w.isFinal = e.isFinal
+      })
+    })
+  }
 
   // Remove holes from word array
   words = words.flat()
@@ -74,13 +82,18 @@ export const BigTranscript: React.FC = props => {
   return (
     <BigTranscriptDiv
       className="BigTranscript"
-      style={springProps}
+      style={{
+        clipPath: springProps.reveal.interpolate(x => `polygon(-25% -50%, ${x as number * 150 - 25}% -50%, ${x as number * 150 - 25}% 150%, -25% 150%)`),
+      }}
     >
+      <TransscriptItem>
+        <VUMeter/>&nbsp;{segment ? null : <span style={{opacity: 0.5}}>Listening</span>}
+      </TransscriptItem>
       {words.map<React.ReactNode>((w, index) => {
-        const key = `${segment.contextId}/${segment.id}/${index}`
+        const key = `${segment?.contextId}/${segment?.id}/${index}`
         return (
           <span key={key}>
-            <TransscriptItem word={w}>{w.word}</TransscriptItem>{' '}
+            <TransscriptItem word={w}>{w.word}&nbsp;</TransscriptItem>
           </span>
         )
       })}
@@ -88,7 +101,7 @@ export const BigTranscript: React.FC = props => {
   )
 }
 
-const TransscriptItem: React.FC<{ word: ITaggedWord }> = props => {
+const TransscriptItem: React.FC<{ word?: ITaggedWord }> = props => {
   const [springProps] = useSpring(() => ({
     from: { opacity: 0 },
     to: { opacity: 1 },
@@ -96,12 +109,12 @@ const TransscriptItem: React.FC<{ word: ITaggedWord }> = props => {
   }))
 
   const entityProps = useSpring({
-    entityEffect: props.word.entityType !== null ? 1 : 0,
+    entityEffect: props.word?.entityType === null ? 0 : 1,
     config: { duration: 250 },
   })
 
   return (
-    <TransscriptItemDiv className={`${props.word.entityType !== null ? 'Entity' : ''} ${props.word.isFinal ? 'Final' : ''} ${props.word.entityType ?? ''}`}>
+    <TransscriptItemDiv className={`${props.word?.entityType === null ? '' : 'Entity'} ${props.word?.isFinal ? 'Final' : ''} ${props.word?.entityType ?? ''}`}>
       <TransscriptItemBgDiv style={springProps} />
       <TransscriptItemContent
         style={{
@@ -119,16 +132,22 @@ const TransscriptItem: React.FC<{ word: ITaggedWord }> = props => {
 
 const BigTranscriptDiv = styled(animated.div)`
   white-space: 'pre';
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 `
 
 const TransscriptItemDiv = styled(animated.div)`
   position: relative;
   white-space: pre;
-  display: inline-block;
+  display: block;
 `
 
 const TransscriptItemContent = styled(animated.div)`
   z-index: 1;
+  display: flex;
+  align-items: center;
 `
 
 const TransscriptItemBgDiv = styled(animated.div)`

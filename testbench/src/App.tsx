@@ -1,5 +1,5 @@
-import React from "react";
-import { SpeechProvider, useSpeechContext } from "@speechly/react-client";
+import React, { useEffect } from "react";
+import { SpeechProvider, SpeechState, useSpeechContext } from "@speechly/react-client";
 import {
   BigTranscript,
   BigTranscriptContainer,
@@ -10,6 +10,11 @@ import {
 //} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
 } from "./@speechly/react-ui";
+import {
+  useSpring,
+  animated,
+  config,
+} from 'react-spring'
 
 export default function App() {
   const appId = process.env.REACT_APP_APP_ID ?? "define-your-app-id-here";
@@ -34,6 +39,45 @@ export default function App() {
 
 function SpeechlyApp() {
   const { speechState, segment, toggleRecording } = useSpeechContext();
+  const [springProps, setSpringProps] = useSpring(() => ({
+    vuMeter: 0,
+    to: {
+      vuMeter: 0
+    },
+    onChange: ({vuMeter}: {vuMeter: number}) => {console.log(vuMeter as number)}
+  }));
+
+  useEffect(() => {
+    if (segment) {
+      setSpringProps({
+        reset: true,
+        from: {
+          vuMeter: 1
+        },
+        to: {
+          vuMeter: 0
+        },
+        onChange: ({vuMeter}: {vuMeter: number}) => {console.log(vuMeter as number)}
+      });
+    }
+  }, [segment]);
+
+  useEffect(() => {
+    if (speechState === SpeechState.Recording) {
+      setSpringProps({
+        to: async (next: any, cancel: any) => {
+          await next({
+            vuMeter: 1,
+            config: config.wobbly
+          })
+          await next({
+            vuMeter: 0,
+            config: config.stiff
+          })
+        }
+      });
+    }
+  }, [speechState]);
 
   return (
     <div>
@@ -46,6 +90,7 @@ function SpeechlyApp() {
       <div className="mic-button">
         <button onClick={toggleRecording}>Record</button>
       </div>
+      <animated.div style={{height:"20px", backgroundColor:"red", width: springProps.vuMeter.interpolate(x => `${(x as number)*120}px`)}}/>
     </div>
   );
 }
