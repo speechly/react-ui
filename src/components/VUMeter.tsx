@@ -1,5 +1,5 @@
+import React, { useEffect, useRef } from 'react'
 import { useSpeechContext, SpeechState } from '@speechly/react-client'
-import { useEffect, useRef } from 'react'
 
 const getPixelRatio = (context: any) => {
   var backingStore =
