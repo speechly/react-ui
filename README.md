@@ -179,14 +179,14 @@ It automatically shows if there is problem detected upon pressing the `<PushToTa
 
 ## Notifications
 
-Notifictions are small messages that are intended to be momentarily displayed.
+Notifications are small messages that are intended to be momentarily displayed.
 
 They are shown inside `<BigTranscriptContainer/>` at the top-left of the screen so it needs to be a part of your DOM.
 
 Notifications can be cleared either programmatically or by tapping on them.
 
   >
-  > Use Notifications to display usage hints and acknowledge actions
+  > Use Notifications to provide voice usage hints and feedback, especially if the app is unable to respond to the user's utterance
   >
 
 ### Installation
