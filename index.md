@@ -164,13 +164,17 @@ It automatically shows if there is problem detected upon pressing the `<PushToTa
 
 ## Notifications
 
-Notifactions are small messages that can are momentarily displayed to display usage hints and acknowledge actions.
+Notifactions are small messages that can are displayed momentarily.
 
-The consist of a message displayed in big typeface and an optional footnote displayed in smaller typeface.
+The consist of the short main message (displayed in big typeface) and an optional footnote (displayed in smaller typeface).
 
 Notifications can be cleared either programmatically or by tapping them.
 
 They are shown inside <BigTranscriptContainer/> at the top-left of the screen so it needs to be a part of your DOM.
+
+  >
+  > Use Notifications to display usage hints and acknowledge actions
+  >
 
 ### Installation
 
