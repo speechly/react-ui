@@ -179,9 +179,7 @@ It automatically shows if there is problem detected upon pressing the `<PushToTa
 
 ## Notifications
 
-Notifactions are small messages that can are displayed momentarily.
-
-The consist of the short main message (displayed in big typeface) and an optional footnote (displayed in smaller typeface).
+Notifictions are small messages that can are displayed momentarily.
 
 Notifications can be cleared either programmatically or by tapping them.
 
@@ -216,6 +214,8 @@ PubSub.publish(SpeechlyUiEvents.Notification, {
     footnote: `Try: "Blue jeans"`
 });
 ```
+
+The notification consists of a short main message (displayed in big typeface) and an optional footnote (displayed in smaller typeface).
 
 One notification can be displayed at a time. A successive call will instantly replace the previous notification.
 
