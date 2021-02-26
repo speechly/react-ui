@@ -181,7 +181,7 @@ It automatically shows if there is problem detected upon pressing the `<PushToTa
 
 Notifictions are small messages that are intended to be momentarily displayed.
 
-They are shown inside <BigTranscriptContainer/> at the top-left of the screen so it needs to be a part of your DOM.
+They are shown inside `<BigTranscriptContainer/>` at the top-left of the screen so it needs to be a part of your DOM.
 
 Notifications can be cleared either programmatically or by tapping on them.
 
