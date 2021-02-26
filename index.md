@@ -164,7 +164,7 @@ It automatically shows if there is problem detected upon pressing the `<PushToTa
 
 ## Notifications
 
-Notifictions are small messages that can are displayed momentarily.
+Notifictions are small messages that are intended to be momentarily displayed.
 
 Notifications can be cleared either programmatically or by tapping them.
 
