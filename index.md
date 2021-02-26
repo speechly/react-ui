@@ -171,7 +171,7 @@ They are shown inside `<BigTranscriptContainer/>` at the top-left of the screen 
 Notifications can be cleared either programmatically or by tapping on them.
 
   >
-  > Use Notifications to provide voice usage hints and feedback, especially if the app is unable to respond to the user's utterance
+  > Use Notifications to provide utterance examples and feedback, especially when the app is unable to respond to the user's utterance
   >
 
 ### Installation
