@@ -195,8 +195,8 @@ import { SpeechlyUiEvents } from "@speechly/react-ui/types";
 
 ```
 PubSub.publish(SpeechlyUiEvents.Notification, {
-    message: `Please say again`,
-    footnote: `Try: "Blue jeans"`
+  message: `Please say again`,
+  footnote: `Try: "Blue jeans"`
 });
 ```
 
