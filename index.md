@@ -9,6 +9,7 @@
 - [PushToTalkButton component](#push-to-talk-button-component)
 - [BigTranscript component](#bigtranscript-component)
 - [ErrorPanel component](#errorpanel-component)
+- [Notifications](#notifications)
 
 ## Installation
 
@@ -161,3 +162,46 @@ It automatically shows if there is problem detected upon pressing the `<PushToTa
   > Use `<ErrorPanel/>` to help users diagnose and recover from voice-related issues
   > 
 
+## Notifications
+
+Notifactions are small messages that can are momentarily displayed to display usage hints and acknowledge actions.
+
+The consist of a message displayed in big typeface and an optional footnote displayed in smaller typeface.
+
+Notifications can be cleared either programmatically or by tapping them.
+
+They are shown inside <BigTranscriptContainer/> at the top-left of the screen so it needs to be a part of your DOM.
+
+### Installation
+
+`pubsub-js` package is used to communicate with the notification manager.
+
+```
+npm install --save pubsub-js
+```
+
+### Usage
+
+Add the following lines to your header:
+
+```
+import PubSub from "pubsub-js";
+import { SpeechlyUiEvents } from "@speechly/react-ui/types";
+```
+
+### Publishing a notification
+
+```
+PubSub.publish(SpeechlyUiEvents.Notification, {
+    message: `Please say again`,
+    footnote: `Try: "Blue jeans"`
+});
+```
+
+One notification can be displayed at a time. A successive call will instantly replace the previous notification.
+
+### Clearing all notifications
+
+```
+PubSub.publish(SpeechlyUiEvents.DismissNotification);
+````
