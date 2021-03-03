@@ -4,7 +4,7 @@
 #
 # Then run this script: ./build-docs.sh
 
-SNIPPETS=docs/snippets
+SNIPPETS=doc-snippets
 
 # ----------- Build -----------------
 TARGET=README.md
