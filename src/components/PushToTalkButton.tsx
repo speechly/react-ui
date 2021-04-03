@@ -105,8 +105,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   }, [speechState])
 
   const tangentReleaseAction = useCallback((e) => {
-    const timeMs = 0; // TODO, get from event
-    PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechState, timeMs })
+    PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechState, timeMs: e.detail.timeMs })
 
     switch (speechState) {
       case SpeechState.Idle:
