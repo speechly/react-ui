@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import PubSub from 'pubsub-js'
 import { SpeechlyUiEvents } from '../types'
@@ -37,14 +37,11 @@ export type PushToTalkButtonProps = {
  * @public
  */
 
-type IHoldableButton = React.HTMLAttributes<HTMLElement> & {
-  capturekey?: string, icon?: string, size?: string, gradientstop1?: string, gradientstop2?: string
-}
-
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "holdable-button": React.DetailedHTMLProps<IHoldableButton, HTMLElement>;
+      'holdable-button': any
     }
   }
 }
@@ -54,40 +51,26 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   gradientStops = ['#15e8b5', '#4fa1f9'],
 }) => {
   const { speechState, toggleRecording, initialise } = useSpeechContext()
-  const [ icon, setIcon ] = useState<string>("poweron")
+  const [icon, setIcon] = useState<string>(SpeechState.Idle as string)
   const buttonRef = useRef<any>()
 
   useEffect(() => {
-    if (buttonRef && buttonRef.current) {
-      const button = buttonRef.current;
-      button.addEventListener("holdstart", tangentPressAction)
-      button.addEventListener("holdend", tangentReleaseAction)
+    if (buttonRef?.current) {
+      const button = buttonRef.current
+      button.addEventListener('holdstart', tangentPressAction)
+      button.addEventListener('holdend', tangentReleaseAction)
 
       return () => {
-        button.removeEventListener("holdstart", tangentPressAction)
-        button.removeEventListener("holdend", tangentReleaseAction)
+        button.removeEventListener('holdstart', tangentPressAction)
+        button.removeEventListener('holdend', tangentReleaseAction)
       }
     }
   })
 
   // Change button face according to Speechly states
   useEffect(() => {
-    switch (speechState) {
-      case SpeechState.Idle:
-        setIcon("poweron");
-        break
-      case SpeechState.Connecting:
-        setIcon("connecting");
-        break
-      case SpeechState.Ready:
-        setIcon("mic");
-        break
-      case SpeechState.Loading:
-        setIcon("loading");
-        break
-      default:
-        break
-    }
+    console.log(speechState as string)
+    setIcon(speechState as string)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
