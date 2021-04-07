@@ -3,6 +3,7 @@ import React, {
   useCallback,
   SyntheticEvent,
   useRef,
+  useState,
 } from 'react'
 import {
   useSpring,
@@ -53,6 +54,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   size = '6.0rem',
   gradientStops = ['#15e8b5', '#4fa1f9'],
 }) => {
+  const [initialised, setInitialised] = useState<boolean>(false)
   const { speechState, toggleRecording, initialise } = useSpeechContext()
   const tangentButtonState = useRef(ButtonDefaultState)
 
@@ -68,6 +70,10 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   )
 
   const onTangentButtonPress = async (event: SyntheticEvent): Promise<void> => {
+    if (!initialised) {
+      await initialise()
+      setInitialised(true)
+    }
     event.preventDefault()
     event.stopPropagation()
 
