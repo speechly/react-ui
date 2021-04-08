@@ -20,7 +20,7 @@
 
 Ƭ  **PushToTalkButtonProps**: { captureKey?: undefined \| string ; gradientStops?: string[] ; size?: undefined \| string  }
 
-*Defined in components/PushToTalkButton.d.ts:7*
+*Defined in components/PushToTalkButton.d.ts:8*
 
 Properties for PushToTalkButton component.
 
@@ -38,8 +38,4 @@ Name | Type | Description |
 
 • `Const` **PushToTalkButton**: React.FC\<[PushToTalkButtonProps](_components_pushtotalkbutton_d_.md#pushtotalkbuttonprops)>
 
-*Defined in components/PushToTalkButton.d.ts:30*
-
-A React component that renders a push-to-talk microphone button.
-
-Make sure to place this component inside your `SpeechProvider` component imported from `@speechly/react-client`.
+*Defined in components/PushToTalkButton.d.ts:38*

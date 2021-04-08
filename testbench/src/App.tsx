@@ -19,8 +19,8 @@ export default function App() {
 
   const appId = ( () => {
     if (queryAppIdParts.length > 0) return queryAppIdParts.slice(-1)[0];
-    if (!process.env.REACT_APP__APP_ID) throw Error("App ID not defined");
-    return process.env.REACT_APP__APP_ID;
+    if (!process.env.REACT_APP__SPEECHLY_APP_ID) throw Error("App ID not defined");
+    return process.env.REACT_APP__SPEECHLY_APP_ID;
   })();
 
   const LoginUrl = queryAppIdParts.length > 0 && queryAppIdParts[0] === "staging" ? "https://staging.speechly.com/login" : process.env.REACT_APP__SPEECHLY_LOGIN_URL;
