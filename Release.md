@@ -3,10 +3,24 @@
 The sources are used to build Speechly React UI Components package.
 
 ## Install dependencies
+
+```
 npm install --save @speechly/react-client
 npm install --save react-spring
 npm install --save styled-components @types/styled-components
 npm install --save pubsub-js @types/pubsub-js
+npm link browser-ui
+```
+
+For `npm link browser-ui` to work, you need to create a source link from `browser-ui` as it's not yet available in npm:
+
+```
+git clone git@github.com:speechly/browser-ui.git
+cd browser-ui/
+pnpm run build
+cd docs/dev
+pnpm link 
+```
 
 ## Using speechly components directly in a project
 
