@@ -67,10 +67,11 @@
   "dependencies": {
     "pubsub-js": "^1.9.2",
     "react-spring": "^8.0.27",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "@speechly/browser-ui": "^1.0.3"
   },
   "bundledDependencies": [
-    "browser-ui"
+    "@speechly/browser-ui"
   ],
   "files": [
     "lib/**/*"

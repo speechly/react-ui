@@ -3,7 +3,7 @@ import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import PubSub from 'pubsub-js'
 import { SpeechlyUiEvents } from '../types'
 import { HintCallout } from './HintCallout'
-import 'browser-ui/holdable-button'
+import '@speechly/browser-ui/holdable-button'
 
 /**
  * Properties for PushToTalkButton component.
