@@ -35,8 +35,8 @@ Create a React app (if starting from scratch), then install the required package
 create-react-app .
 
 # Install react-ui and react-client dependency
-npm install --save @speechly/react-client
-npm install --save @speechly/react-ui
+npm i @speechly/react-client
+npm i @speechly/react-ui
 ```
 
 ## Usage
