@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@speechly/react-client": "^0.0.5",
+    "@speechly/react-client": "^0.0.16",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -28,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "link": "rm -r ./src/@speechly && sh initialize.sh"
+    "link": "rm -r ./src/@speechly && sh ../link-react-ui.sh",
+    "deploy": "set -o allexport;. ./.env;set +o allexport && rsync -avz --delete build/ $REACT_APP__DEPLOY_DESTINATION_URI"
   },
   "eslintConfig": {
     "extends": [
