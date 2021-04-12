@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "@speechly/react-client": "^0.0.5",
-    "@speechly/browser-ui": "^1.0.3",
     "@types/pubsub-js": "^1.8.1",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
@@ -68,11 +67,9 @@
   "dependencies": {
     "pubsub-js": "^1.9.2",
     "react-spring": "^8.0.27",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "@speechly/browser-ui": "^1.0.3"
   },
-  "bundledDependencies": [
-    "@speechly/browser-ui"
-  ],
   "files": [
     "lib/**/*"
   ],
