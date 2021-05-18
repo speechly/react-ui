@@ -73,12 +73,15 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   // Change button face according to Speechly states
   useEffect(() => {
+    console.log("Speechstate", speechState)
+    window.postMessage({ type: "speechstate", state: speechState }, "*");
     setIcon(speechState as string)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
 
   const tangentPressAction = (): void => {
     PubSub.publish(SpeechlyUiEvents.TangentPress, { state: speechStateRef.current })
+    window.postMessage({ type: 'holdstart' }, '*')
     switch (speechStateRef.current) {
       case SpeechState.Idle:
       case SpeechState.Failed:
@@ -96,6 +99,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   const tangentReleaseAction = (e: any): void => {
     PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechStateRef.current, timeMs: e.timeMs })
+    window.postMessage({ type: 'holdend' }, '*')
 
     switch (speechStateRef.current) {
       case SpeechState.Recording:
