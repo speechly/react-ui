@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSpeechContext } from '@speechly/react-client'
+import { mapSpeechStateToClientState } from '../types'
 import '@speechly/browser-ui/big-transcript'
 
 declare global {
@@ -19,8 +20,15 @@ declare global {
  * @public
  */
 export const BigTranscript: React.FC = props => {
-  const { segment } = useSpeechContext()
+  const { segment, speechState } = useSpeechContext()
 
+  // Change button face according to Speechly states
+  useEffect(() => {
+    console.log("Speechstate", speechState)
+    window.postMessage({ type: "speechstate", state: mapSpeechStateToClientState(speechState) }, "*");
+  }, [speechState])
+
+  
   useEffect(() => {
     window.postMessage({ type: 'speechsegment', segment: segment }, '*')
   }, [segment])

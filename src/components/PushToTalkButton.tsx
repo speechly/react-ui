@@ -73,8 +73,6 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   // Change button face according to Speechly states
   useEffect(() => {
-    console.log("Speechstate", speechState)
-    window.postMessage({ type: "speechstate", state: speechState }, "*");
     setIcon(speechState as string)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechState])
