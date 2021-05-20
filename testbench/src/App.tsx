@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { SpeechProvider, useSpeechContext } from "@speechly/react-client";
+import React, { useEffect, useState } from "react";
+import { SpeechProvider, SpeechState, useSpeechContext } from "@speechly/react-client";
 import {
 //  BigTranscript,
   BigTranscriptContainer,
@@ -46,14 +46,7 @@ export default function App() {
         loginUrl={LoginUrl}
         apiUrl={ApiUrl}
       >
-        <BigTranscriptContainer>
-          <BigTranscript />
-        </BigTranscriptContainer>
         <SpeechlyApp />
-        <PushToTalkButtonContainer>
-          <PushToTalkButton captureKey=" "/>
-          <ErrorPanel/>
-        </PushToTalkButtonContainer>
       </SpeechProvider>
     </div>
   );
@@ -61,9 +54,14 @@ export default function App() {
 
 function SpeechlyApp() {
   const { speechState, segment, toggleRecording } = useSpeechContext();
+  const [hintText, setHintText] = useState("Tip1")
 
   useEffect(() => {
     if (segment?.isFinal) {
+      window.postMessage({ type: "speechhandled", success: true }, "*")
+
+      setHintText("Tip2")
+
       PubSub.publish(SpeechlyUiEvents.Notification, {
         message: "Feedback notification test",
         footnote: "Triggered on final segment",
@@ -72,7 +70,15 @@ function SpeechlyApp() {
   }, [segment])
 
   return (
-    <div>
+    <>
+      <BigTranscriptContainer>
+        <TranscriptDrawer hint={hintText}/>
+      </BigTranscriptContainer>
+      <PushToTalkButtonContainer>
+        <PushToTalkButton captureKey=" "/>
+        <ErrorPanel/>
+      </PushToTalkButtonContainer>
+
       <div className="status">{speechState}</div>
       {segment ? (
         <div className="segment">
@@ -82,6 +88,6 @@ function SpeechlyApp() {
       <div className="mic-button">
         <button onClick={toggleRecording}>Record</button>
       </div>
-    </div>
+    </>
   );
 }

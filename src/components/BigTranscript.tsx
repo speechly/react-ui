@@ -13,13 +13,42 @@ declare global {
 }
 
 /**
+ * Properties for BigTranscript component.
+ *
+ * @public
+ */
+ export type BigTranscriptProps = {
+  /**
+   * Optional CSS string for text size. Default: "1.5rem"
+   */
+  fontSize?: string
+  /**
+   * Optional string (CSS color) for text. Default: "#ffffff"
+   */
+  color?: string
+  /**
+   * Optional string (CSS color) for entity highlighting, vu meter and acknowledged icon. Default: "#15e8b5"
+   */
+  highlightColor?: string
+  /**
+   * Optional string (CSS color) for hint text background. Default: "#202020"
+   */
+  backgroundColor?: string
+  /**
+   * Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem"
+   */
+  marginBottom?: string
+ }
+
+
+/**
  * A React component that renders the transcript and entities received from Speechly SLU API.
  *
  * The component is intended to be used for providing visual feedback to the speaker.
  *
  * @public
  */
-export const BigTranscript: React.FC = props => {
+export const BigTranscript: React.FC<BigTranscriptProps> = props => {
   const { segment, speechState } = useSpeechContext()
   const refElement = useRef<any>()
 
@@ -38,6 +67,6 @@ export const BigTranscript: React.FC = props => {
   }, [segment])
 
   return (
-    <big-transcript ref={refElement}></big-transcript>
+    <big-transcript ref={refElement} fontsize={props.fontSize} color={props.color} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom || "2rem"}></big-transcript>
   )
 }
