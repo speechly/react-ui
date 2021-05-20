@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react'
 import { useSpeechContext } from '@speechly/react-client'
 import { mapSpeechStateToClientState } from '../types'
-import '@speechly/browser-ui/big-transcript'
+import '@speechly/browser-ui/transcript-drawer'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'big-transcript': any
+      'transcript-drawer': any
     }
   }
 }
@@ -19,11 +19,10 @@ declare global {
  *
  * @public
  */
-export const BigTranscript: React.FC = props => {
+export const TranscriptDrawer: React.FC = props => {
   const { segment, speechState } = useSpeechContext()
   const refElement = useRef<any>()
 
-  // Change button face according to Speechly states
   useEffect(() => {
     if (refElement?.current) {
       refElement.current.speechstate(mapSpeechStateToClientState(speechState));
@@ -38,6 +37,6 @@ export const BigTranscript: React.FC = props => {
   }, [segment])
 
   return (
-    <big-transcript ref={refElement}></big-transcript>
+    <transcript-drawer ref={refElement} hint='Try: "Eat your shorts"'></transcript-drawer>
   )
 }

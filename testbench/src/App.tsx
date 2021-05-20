@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SpeechProvider, useSpeechContext } from "@speechly/react-client";
 import {
-  BigTranscript,
+//  BigTranscript,
   BigTranscriptContainer,
   PushToTalkButton,
   PushToTalkButtonContainer,
   ErrorPanel,
   Notifications,
+  BigTranscript,
 //} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
 } from "./@speechly/react-ui";
+
+
+import {
+  TranscriptDrawer,
+} from "./@speechly/react-ui/components/TranscriptDrawer";
+
 import QueryString from "query-string";
+import { SpeechlyUiEvents } from "./@speechly/react-ui/types";
 
 export default function App() {
   // http://localhost:3000/?appId=staging:nnnnn
@@ -40,7 +48,6 @@ export default function App() {
       >
         <BigTranscriptContainer>
           <BigTranscript />
-          <Notifications/>
         </BigTranscriptContainer>
         <SpeechlyApp />
         <PushToTalkButtonContainer>
@@ -54,6 +61,15 @@ export default function App() {
 
 function SpeechlyApp() {
   const { speechState, segment, toggleRecording } = useSpeechContext();
+
+  useEffect(() => {
+    if (segment?.isFinal) {
+      PubSub.publish(SpeechlyUiEvents.Notification, {
+        message: "Feedback notification test",
+        footnote: "Triggered on final segment",
+      })
+    }
+  }, [segment])
 
   return (
     <div>
