@@ -24,8 +24,13 @@ const BigTranscriptContainerDiv = styled.div<{
   margin: string
 }>`
   position: ${(props) => props.position};
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   margin: ${(props) => props.margin};
-  z-index: 10;
+  z-index: 50;
+  pointer-events: none;
 
   color: #fff;
   font-size: 1.4rem;

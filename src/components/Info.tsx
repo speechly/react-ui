@@ -62,13 +62,15 @@ export const Info: React.FC<InfoProps> = props => {
 
 const InfoItemDiv = styled(animated.div)`
   user-select: none;
+  pointer-events: auto;
   position: relative;
-  display: block;
+  display: inline-block;
 `
 
 const InfoItemContent = styled(animated.div)`
   z-index: 1;
   font-size: 1.2rem;
+  line-height: 110%;
   // color: #000;
   display: flex;
   flex-direction: row;
@@ -80,8 +82,10 @@ const InfoItemBgDiv = styled(animated.div)<{backgroundcolor: string}>`
   box-sizing: content-box;
   width: 100%;
   height: 100%;
-  margin: -0.5rem;
-  padding: 0.5rem;
+  top: -0.5rem;
+  left: -0.8rem;
+  margin: 0;
+  padding: 0.5rem 0.8rem;
   background-color: ${(props) => props.backgroundcolor};
   z-index: -1;
 `
