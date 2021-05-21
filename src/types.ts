@@ -1,5 +1,5 @@
-import { ClientState } from "@speechly/browser-client"
-import { SpeechState } from "@speechly/react-client"
+import { ClientState } from '@speechly/browser-client'
+import { SpeechState } from '@speechly/react-client'
 
 export enum SpeechlyUiEvents {
   TangentRelease = 'TangentRelease',
@@ -19,7 +19,7 @@ export const mapSpeechStateToClientState = (s: SpeechState): ClientState => {
       return ClientState.NoAudioConsent
     case SpeechState.Idle:
       return ClientState.Disconnected
-      //return ClientState.Disconnecting:
+      // return ClientState.Disconnecting:
     case SpeechState.Connecting:
       return ClientState.Connecting
     case SpeechState.Ready:

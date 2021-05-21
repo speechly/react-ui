@@ -18,7 +18,7 @@ declare global {
  *
  * @public
  */
- export type TranscriptDrawerProps = BigTranscriptProps & {
+export type TranscriptDrawerProps = BigTranscriptProps & {
   /**
    * Optional hint text
    */
@@ -27,8 +27,7 @@ declare global {
    * Optional minimum height as CSS string. Default: "8rem"
    */
   height?: string
- }
-
+}
 
 /**
  * A React component that renders the transcript and entities received from Speechly SLU API.
@@ -42,14 +41,13 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   const refElement = useRef<any>()
 
   useEffect(() => {
-    if (refElement?.current) {
-      refElement.current.speechstate(mapSpeechStateToClientState(speechState));
+    if (refElement?.current !== undefined) {
+      refElement.current.speechstate(mapSpeechStateToClientState(speechState))
     }
   }, [speechState])
 
-  
   useEffect(() => {
-    if (refElement?.current) {
+    if (refElement?.current !== undefined) {
       refElement.current.speechsegment(segment)
     }
   }, [segment])

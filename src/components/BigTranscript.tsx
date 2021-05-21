@@ -17,7 +17,7 @@ declare global {
  *
  * @public
  */
- export type BigTranscriptProps = {
+export type BigTranscriptProps = {
   /**
    * Optional CSS string for text size. Default: "1.5rem"
    */
@@ -38,8 +38,7 @@ declare global {
    * Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem"
    */
   marginBottom?: string
- }
-
+}
 
 /**
  * A React component that renders the transcript and entities received from Speechly SLU API.
@@ -48,25 +47,30 @@ declare global {
  *
  * @public
  */
-export const BigTranscript: React.FC<BigTranscriptProps> = props => {
+export const BigTranscript: React.FC<BigTranscriptProps> = ({
+  fontSize,
+  color,
+  highlightColor,
+  backgroundColor,
+  marginBottom = '2rem',
+}) => {
   const { segment, speechState } = useSpeechContext()
   const refElement = useRef<any>()
 
   // Change button face according to Speechly states
   useEffect(() => {
-    if (refElement?.current) {
-      refElement.current.speechstate(mapSpeechStateToClientState(speechState));
+    if (refElement?.current !== undefined) {
+      refElement.current.speechstate(mapSpeechStateToClientState(speechState))
     }
   }, [speechState])
 
-  
   useEffect(() => {
-    if (refElement?.current) {
+    if (refElement?.current !== undefined) {
       refElement.current.speechsegment(segment)
     }
   }, [segment])
 
   return (
-    <big-transcript ref={refElement} fontsize={props.fontSize} color={props.color} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom || "2rem"}></big-transcript>
+    <big-transcript ref={refElement} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
   )
 }
