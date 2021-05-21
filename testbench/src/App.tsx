@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { SpeechProvider, SpeechState, useSpeechContext } from "@speechly/react-client";
+import { SpeechProvider, useSpeechContext } from "@speechly/react-client";
 import {
 //  BigTranscript,
   BigTranscriptContainer,
   PushToTalkButton,
   PushToTalkButtonContainer,
   ErrorPanel,
-  Notifications,
   BigTranscript,
 //} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
@@ -54,13 +53,13 @@ export default function App() {
 
 function SpeechlyApp() {
   const { speechState, segment, toggleRecording } = useSpeechContext();
-  const [hintText, setHintText] = useState("Tip1")
+  const [hintText, setHintText] = useState('Try "Hello world!"')
 
   useEffect(() => {
     if (segment?.isFinal) {
       window.postMessage({ type: "speechhandled", success: true }, "*")
 
-      setHintText("Tip2")
+      setHintText('Try "Show me blue jeans"')
 
       PubSub.publish(SpeechlyUiEvents.Notification, {
         message: "Feedback notification test",
@@ -75,7 +74,7 @@ function SpeechlyApp() {
         <TranscriptDrawer hint={hintText}/>
       </BigTranscriptContainer>
       <PushToTalkButtonContainer>
-        <PushToTalkButton intro="Ping!" hint="Lai"/>
+        <PushToTalkButton intro="Hold to use voice commands"/>
         <ErrorPanel/>
       </PushToTalkButtonContainer>
 
