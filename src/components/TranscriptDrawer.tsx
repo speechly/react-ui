@@ -53,6 +53,6 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   }, [segment])
 
   return (
-    <transcript-drawer ref={refElement} fontsize={props.fontSize} color={props.color} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
+    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
   )
 }

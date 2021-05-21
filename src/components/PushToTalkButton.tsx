@@ -64,6 +64,10 @@ export type PushToTalkButtonProps = {
    */
   showTime?: number
   /**
+   * Optional string (CSS color) for hint text. Default: "#ffffff"
+   */
+  textColor?: string
+  /**
    * Optional string (CSS color) for hint text background. Default: "#202020"
    */
   backgroundColor?: string
@@ -87,6 +91,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   hint = 'Hold to talk',
   fontSize,
   showTime,
+  textColor,
   backgroundColor,
 }) => {
   const { speechState, toggleRecording, initialise } = useSpeechContext()
@@ -177,8 +182,8 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   return (
     <div>
-      <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'} intro={intro} hint={hint} showtime={showTime} fontsize={fontSize} backgroundColor={backgroundColor}></holdable-button>
-      <call-out fontsize="1.2rem" show={showHint && hintText !== ''} backgroundcolor="#202020" showtime={showTime}>{hintText}</call-out>
+      <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'}></holdable-button>
+      <call-out show={showHint && hintText !== ''} fontsize={fontSize} textcolor={textColor} backgroundcolor={backgroundColor} showtime={showTime}>{hintText}</call-out>
     </div>
   )
 }

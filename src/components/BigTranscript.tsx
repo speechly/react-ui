@@ -19,6 +19,10 @@ declare global {
  */
 export type BigTranscriptProps = {
   /**
+   * Optional boolean. If true, transcript is formatted with detected entities, e.g. numbers. Default: true
+   */
+  formatText?: boolean
+  /**
    * Optional CSS string for text size. Default: "1.5rem"
    */
   fontSize?: string
@@ -48,6 +52,7 @@ export type BigTranscriptProps = {
  * @public
  */
 export const BigTranscript: React.FC<BigTranscriptProps> = ({
+  formatText,
   fontSize,
   color,
   highlightColor,
@@ -71,6 +76,6 @@ export const BigTranscript: React.FC<BigTranscriptProps> = ({
   }, [segment])
 
   return (
-    <big-transcript ref={refElement} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
+    <big-transcript ref={refElement} formattext={(formatText !== null && formatText === false) ? 'true' : 'false'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
   )
 }
