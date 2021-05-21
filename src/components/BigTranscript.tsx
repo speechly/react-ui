@@ -76,6 +76,6 @@ export const BigTranscript: React.FC<BigTranscriptProps> = ({
   }, [segment])
 
   return (
-    <big-transcript ref={refElement} formattext={(formatText !== null && formatText === false) ? 'true' : 'false'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
+    <big-transcript ref={refElement} formattext={(formatText !== null && formatText === false) ? 'false' : 'true'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
   )
 }

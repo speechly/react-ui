@@ -71,7 +71,7 @@ function SpeechlyApp() {
   return (
     <>
       <BigTranscriptContainer>
-        <TranscriptDrawer hint={hintText}/>
+        <TranscriptDrawer hint={hintText} formatText={false}/>
       </BigTranscriptContainer>
       <PushToTalkButtonContainer>
         <PushToTalkButton intro="Hold to use voice commands"/>

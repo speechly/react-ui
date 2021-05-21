@@ -18,7 +18,7 @@
 
 ### PushToTalkButtonProps
 
-Ƭ  **PushToTalkButtonProps**: { backgroundColor?: undefined \| string ; captureKey?: undefined \| string ; fontSize?: undefined \| string ; gradientStops?: string[] ; hide?: undefined \| false \| true ; hint?: undefined \| string ; intro?: undefined \| string ; powerOn?: undefined \| false \| true ; showTime?: undefined \| number ; size?: undefined \| string  }
+Ƭ  **PushToTalkButtonProps**: { backgroundColor?: undefined \| string ; captureKey?: undefined \| string ; fontSize?: undefined \| string ; gradientStops?: string[] ; hide?: undefined \| false \| true ; hint?: undefined \| string ; intro?: undefined \| string ; powerOn?: undefined \| false \| true ; showTime?: undefined \| number ; size?: undefined \| string ; textColor?: undefined \| string  }
 
 *Defined in components/PushToTalkButton.d.ts:19*
 
@@ -38,6 +38,7 @@ Name | Type | Description |
 `powerOn?` | undefined \| false \| true | Optional boolean. Shows poweron state. If false, recording can immediately start but will first press will cause a system permission prompt. Default: false |
 `showTime?` | undefined \| number | Optional number in ms. Visibility duration for intro and hint callouts. Default: "5000" (ms) |
 `size?` | undefined \| string | The size of the button, as CSS (e.g. `5rem`). |
+`textColor?` | undefined \| string | Optional string (CSS color) for hint text. Default: "#ffffff" |
 
 ## Variables
 
@@ -45,7 +46,7 @@ Name | Type | Description |
 
 • `Const` **PushToTalkButton**: React.FC\<[PushToTalkButtonProps](_components_pushtotalkbutton_d_.md#pushtotalkbuttonprops)>
 
-*Defined in components/PushToTalkButton.d.ts:70*
+*Defined in components/PushToTalkButton.d.ts:74*
 
 A React component that renders a push-to-talk microphone button.
 

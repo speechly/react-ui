@@ -18,7 +18,7 @@
 
 ### BigTranscriptProps
 
-Ƭ  **BigTranscriptProps**: { backgroundColor?: undefined \| string ; color?: undefined \| string ; fontSize?: undefined \| string ; highlightColor?: undefined \| string ; marginBottom?: undefined \| string  }
+Ƭ  **BigTranscriptProps**: { backgroundColor?: undefined \| string ; color?: undefined \| string ; fontSize?: undefined \| string ; formatText?: undefined \| false \| true ; highlightColor?: undefined \| string ; marginBottom?: undefined \| string  }
 
 *Defined in components/BigTranscript.d.ts:15*
 
@@ -31,6 +31,7 @@ Name | Type | Description |
 `backgroundColor?` | undefined \| string | Optional string (CSS color) for hint text background. Default: "#202020" |
 `color?` | undefined \| string | Optional string (CSS color) for text. Default: "#ffffff" |
 `fontSize?` | undefined \| string | Optional CSS string for text size. Default: "1.5rem" |
+`formatText?` | undefined \| false \| true | Optional boolean. If true, transcript is formatted with detected entities, e.g. numbers. Default: true |
 `highlightColor?` | undefined \| string | Optional string (CSS color) for entity highlighting, vu meter and acknowledged icon. Default: "#15e8b5" |
 `marginBottom?` | undefined \| string | Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem" |
 
@@ -40,7 +41,7 @@ Name | Type | Description |
 
 • `Const` **BigTranscript**: React.FC\<[BigTranscriptProps](_components_bigtranscript_d_.md#bigtranscriptprops)>
 
-*Defined in components/BigTranscript.d.ts:44*
+*Defined in components/BigTranscript.d.ts:48*
 
 A React component that renders the transcript and entities received from Speechly SLU API.
 
