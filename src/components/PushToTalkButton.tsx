@@ -123,7 +123,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     }
 
     // Automatically start recording if button held
-    if (!powerOn && buttonRef?.current?.isbuttonpressed() === false && speechState === SpeechState.Ready) {
+    if (!powerOn && buttonRef?.current?.isbuttonpressed() === true && speechState === SpeechState.Ready) {
       toggleRecording().catch(err => console.error('Error while starting to record', err))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
