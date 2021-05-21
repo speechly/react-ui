@@ -83,16 +83,20 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   captureKey,
   size = '6.0rem',
   gradientStops = ['#15e8b5', '#4fa1f9'],
-  intro,
-  hint,
+  intro = "Hold to talk",
+  hint = "Hold to talk",
   fontSize,
   showTime,
   backgroundColor
 }) => {
   const { speechState, toggleRecording, initialise } = useSpeechContext()
   const [icon, setIcon] = useState<string>((powerOn ? SpeechState.Idle : SpeechState.Ready) as string)
+  const [hintText, setHintText] = useState<string>(intro)
+  const [showHint, setShowHint] = useState(true)
   const buttonRef = useRef<any>()
   const speechStateRef = useRef<SpeechState>()
+
+  const SHORT_PRESS_TRESHOLD_MS = 600
 
   // make stateRef always have the current count
   // your "fixed" callbacks can refer to this object whenever
@@ -128,6 +132,8 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   const tangentPressAction = (): void => {
     PubSub.publish(SpeechlyUiEvents.TangentPress, { state: speechStateRef.current })
     window.postMessage({ type: 'holdstart' }, '*')
+    setShowHint(false)
+
     switch (speechStateRef.current) {
       case SpeechState.Idle:
       case SpeechState.Failed:
@@ -143,9 +149,22 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
     }
   }
 
-  const tangentReleaseAction = (e: any): void => {
-    PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechStateRef.current, timeMs: e.timeMs })
+  const tangentReleaseAction = (event: any): void => {
+    PubSub.publish(SpeechlyUiEvents.TangentRelease, { state: speechStateRef.current, timeMs: event.timeMs })
     window.postMessage({ type: 'holdend' }, '*')
+
+    switch (speechStateRef?.current) {
+      case SpeechState.Ready:
+      case SpeechState.Recording:
+      case SpeechState.Connecting:
+      case SpeechState.Loading:
+          if (event.timeMs < SHORT_PRESS_TRESHOLD_MS) {
+          console.log(speechStateRef?.current)
+          setHintText(hint)
+          setShowHint(true)
+        }
+        break;
+    }
 
     switch (speechStateRef.current) {
       case SpeechState.Recording:
@@ -159,7 +178,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   return (
     <div>
       <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? "true" : "false"} intro={intro} hint={hint} showtime={showTime} fontsize={fontSize} backgroundColor={backgroundColor}></holdable-button>
-      <call-out fontsize="1.2rem" show={speechState === SpeechState.Recording ? "true" : "false"} backgroundcolor="#202020">Whatever</call-out>
+      <call-out fontsize="1.2rem" show={showHint && hintText !== ""} backgroundcolor="#202020" showtime={showTime}>{hintText}</call-out>
     </div>
   )
 }

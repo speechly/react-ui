@@ -75,7 +75,7 @@ function SpeechlyApp() {
         <TranscriptDrawer hint={hintText}/>
       </BigTranscriptContainer>
       <PushToTalkButtonContainer>
-        <PushToTalkButton captureKey=" "/>
+        <PushToTalkButton intro="Ping!" hint="Lai"/>
         <ErrorPanel/>
       </PushToTalkButtonContainer>
 

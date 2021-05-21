@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@speechly/browser-ui': ^1.3.7
+  '@speechly/browser-ui': ^1.3.8
   '@speechly/react-client': ^0.0.16
   '@testing-library/jest-dom': ^5.11.4
   '@testing-library/react': ^11.1.0
@@ -24,7 +24,7 @@ specifiers:
   web-vitals: ^0.2.4
 
 dependencies:
-  '@speechly/browser-ui': 1.3.7
+  '@speechly/browser-ui': 1.3.8
   '@speechly/react-client': 0.0.16_react@17.0.2
   '@testing-library/jest-dom': 5.12.0
   '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
@@ -1864,8 +1864,8 @@ packages:
       uuid: 8.3.2
     dev: false
 
-  /@speechly/browser-ui/1.3.7:
-    resolution: {integrity: sha512-OK4XLNt2Xm4Xn3TRceqw2Nr5Dux+SLBbGXFn5MFnQ/IBThhgCkHAqr/dB8O+bTsA6Y0fRHG8OlV+24IBDLHktg==}
+  /@speechly/browser-ui/1.3.8:
+    resolution: {integrity: sha512-+xpL0MRfawyqodIVp/d0QMRI21I1Kdc2V+4OdV3mSTnpZ6OBjjl8Dfn0bt6p13IX7hzEiMA+lFiOqTOcMH7ZFg==}
     dev: false
 
   /@speechly/react-client/0.0.16_react@17.0.2:
