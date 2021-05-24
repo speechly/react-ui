@@ -174,7 +174,7 @@ Example of displaying confimation checkmark with `speechhandled` message:
 Set the `hint` property to show relevant hints for your audience at the time they are likely to need it.
 
   > 
-  > Use `<TranscriptDrawer/>` to display both transcript _and_ and usage hints. Example phrases make hints: _Try "New arrivals"_. You could then anticipate the needs of the user with something like _Try "What brands do you have?"_ *or* _Try "I need t-shirts"_ ...
+  > Use `<TranscriptDrawer/>` to display both transcript *and* usage hints. Example phrases make hints: _Try "New arrivals"_. You could then anticipate the needs of the user with something like _Try "What brands do you have?"_ *or* _Try "I need t-shirts"_ ...
   > 
 
 ### Usage
