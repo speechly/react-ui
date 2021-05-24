@@ -77,11 +77,27 @@ The Push-to-Talk button is intended to be placed as a floating button at the low
 
 Desktop users can control it with an optional keyboard hotkey. Our hotkey recommendation is the spacebar.
 
-The placement, size and colors of the button can be customised.
+The size and colors of the button can be customised. `<PushToTalkButtonContainer>` component is a convenience container that places the button at the lower part of the screen. You may replace it with your own `<div>` or similar.
+
 
   > 
   > Use `<PushToTalkButton/>` to let users turn listening for voice input on and off
   > 
+
+<h3>Properties</h3>
+<ul>
+  <li><code>powerOn</code> - Optional boolean true | false. Shows poweron state. If false, recording can immediately start but will first press will cause a system permission prompt. Default: false </li>
+  <li><code>captureKey</code> - Optional string (of length 1). Defines a keyboard hotkey that with control listening on/off. Default: undefined. Recommendation: Space (" ")</li>
+  <li><code>size</code> - Optional string (CSS). Defines the button frame width and height. Default: "6rem"</li>
+  <li><code>hide</code> - Optional false | true. Default: false</li>
+  <li><code>intro</code> - Optional string containing a short usage introduction. Displayed when the component is first displayed. Default: "Push to talk". Set to "" to disable.</li>
+  <li><code>hint</code> - Optional string containing a short usage hint. Displayed on a short tap. Default: "Push to talk". Set to "" to disable.</li>
+  <li><code>fontSize</code> - Optional CSS string for hint text. Default: "1.2rem"</li>
+  <li><code>showTime</code> - Optional number in ms. Visibility duration for intro and hint callouts. Default: "5000" (ms)</li>
+  <li><code>textColor</code> - Optional string (CSS color) for hint text. Default: "#ffffff"
+  <li><code>backgroundColor</code> - Optional string (CSS color) for hint text background. Default: "#202020"
+  <li><code>gradientStops</code> - Optional array of string (CSS color) for button border and effect. Default: ["#15e8b5", "#4fa1f9"]
+</ul>
 
 ### States
 
@@ -97,58 +113,57 @@ The icon on the button displays the Speechly system state:
 
 5. **Error** (Broken mic icon). In case of an error (usually during initialisation), the button turns into a broken mic symbol. If you have the optional `<ErrorPanel/>` component in your hierarchy, a description of the problem is displayed. Otherwise, you'll need to look into the browser console to discover the reason for the error. Shown in case of `SpeechlyState.Failed`, `SpeechlyState.NoAudioConsent`, `SpeechlyState.NoBrowserSupport`
 
-### Customisation
-
-- `<PushToTalkButtonContainer>` is a convenience container that places the button at the lower part of the screen. You may replace it with your own `<div>` or similar.
-
-- The widget size is defined by the `size` property. Parameters are in css, e.g. `6rem`.
-
-```tsx
-<PushToTalkButton size="6rem" />
-```
-
-- Colors are defined by `gradientStops` property. Parameter is an array of 2 colors, e.g. ["#aaa","#ddd"].
-
-```tsx
-<PushToTalkButton gradientStops={["#aaa", "#ddd"]} />
-```
-
 ## BigTranscript component
 
 `<BigTranscript/>` is an overlay-style component for displaying real-time speech-to-text transcript.
 
 It is intended to be placed as an overlay near top-left corner of the screen with `<BigTranscriptContainer>`. It is momentarily displayed and automatically hidden after the end of voice input.
 
-The placement, typography and colors of the button can be customised. Recognized entities are tagged with css classes so they can be styled individually.
-
   > 
   > Use `<BigTranscript/>` to display real-time speech-to-text transcript for better feedback
   > 
 
-### Customisation
+<h3>Properties</h3>
+<ul>
+  <li><code>fontSize</code> - Optional CSS string for text size. Default: "1.5rem"</li>
+  <li><code>color</code> - Optional string (CSS color) for text. Default: "#ffffff"
+  <li><code>highlightColor</code> - Optional string (CSS color) for entity highlighting, vu meter and acknowledged icon. Default: "#15e8b5"
+  <li><code>backgroundColor</code> - Optional string (CSS color) for hint text background. Default: "#202020"
+  <li><code>marginBottom</code> - Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem"
+  <li><code>formatText</code> - Optional true | false. If true, transcript is formatted with detected entities, e.g. numbers. Default: true
+</ul>
 
-Styling like colors can be assigned to `.BigTranscript` container class and to different entity types by using `.Entity.<EntityName>` selector. Replace `<EntityName>` with the exact entity name defined in your SAL.
+<h3>Window messages listened</h3>
+<ul>
+  <li><code>{type: "speechhandled", success: boolean}</code> - Optionally send a confirmation on segment.isFinal that speech was processed. An indication will be shown with big-transcript.</li>
+</ul>
 
-```css
-.BigTranscript {
-  color: #fff;
-  font-family: "Organetto";
-  font-size: 1.4rem;
-  line-height: 1.15;
-}
+## TranscriptDrawer component
 
-.BigTranscript .Entity {
-  color: #909090;
-}
+`<TranscriptDrawer/>` is an alternative to BigTranscript. It is drawer-style component that appears from the top of the viewport and to display real-time speech-to-text transcript and an usage hint like _Try "Show me blue jeans"_ to help users get started.
 
-.BigTranscript .Entity.room {
-  color: #1fd3f3;
-}
+It is momentarily displayed and automatically hidden after the end of voice input.
 
-.BigTranscript .Entity.device {
-  color: #1fd3f3;
-}
-```
+  > 
+  > Use `<TranscriptDrawer/>` to display real-time speech-to-text transcript for better feedback
+  > 
+
+<h3>Properties</h3>
+<ul>
+  <li><code>hint</code> - Hint text
+  <li><code>height</code> - Optional minimum height as CSS string. Default: "8rem"</li>
+  <li><code>color</code> - Optional string (CSS color) for text. Default: "#ffffff"
+  <li><code>smallTextColor</code> - Optional string (CSS color) for hint text. Default: "#ffffff70"
+  <li><code>highlightColor</code> - Optional string (CSS color) for entity highlighting, vu meter and acknowledged icon. Default: "#15e8b5"
+  <li><code>backgroundColor</code> - Optional string (CSS color) for hint text background. Default: "#202020"
+  <li><code>fontSize</code> - Optional CSS string for text size. Default: "1.5rem"</li>
+  <li><code>formatText</code> - Optional true | false. If true, transcript is formatted with detected entities, e.g. numbers. Default: true
+</ul>
+
+<h3>Window messages listened</h3>
+<ul>
+  <li><code>{type: "speechhandled", success: boolean}</code> - Optionally send a confirmation on segment.isFinal that speech was processed. An indication will be shown with big-transcript.</li>
+</ul>
 
 ## ErrorPanel component
 
@@ -196,7 +211,7 @@ import { SpeechlyUiEvents } from "@speechly/react-ui/types";
 ```
 PubSub.publish(SpeechlyUiEvents.Notification, {
   message: `Please say again`,
-  footnote: `Try: "Blue jeans"`
+  footnote: `Try "Blue jeans"`
 });
 ```
 
@@ -209,3 +224,7 @@ One notification can be displayed at a time. A successive call will instantly re
 ```
 PubSub.publish(SpeechlyUiEvents.DismissNotification);
 ````
+
+## Documentation
+
+You can find the detailed API documentation in [GitHub repository](https://github.com/speechly/react-ui/blob/master/docs/modules/_index_d_.md).

@@ -27,7 +27,12 @@ export type TranscriptDrawerProps = BigTranscriptProps & {
    * Optional minimum height as CSS string. Default: "8rem"
    */
   height?: string
+  /**
+   * Optional string (CSS color) for hint text. Default: "#ffffff70"
+   */
+  smallTextColor?: string
 }
+
 
 /**
  * A React component that renders the transcript and entities received from Speechly SLU API.
@@ -53,6 +58,6 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   }, [segment])
 
   return (
-    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
+    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
   )
 }
