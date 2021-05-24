@@ -23,6 +23,7 @@ Complete your touch user interface with voice
 - [Usage](#usage)
 - [PushToTalkButton component](#push-to-talk-button-component)
 - [BigTranscript component](#bigtranscript-component)
+- [TranscriptDrawer component](#transcriptdrawer-component)
 - [ErrorPanel component](#errorpanel-component)
 - [Notifications](#notifications)
 
@@ -153,14 +154,27 @@ It is intended to be placed as an overlay near top-left corner of the screen wit
   <li><code>{type: "speechhandled", success: boolean}</code> - Optionally send a confirmation on segment.isFinal that speech was processed. An indication will be shown with big-transcript.</li>
 </ul>
 
+Example of displaying confimation checkmark with `speechhandled` message:
+
+```tsx
+  const { segment } = useSpeechContext();
+
+  useEffect(() => {
+    if (segment?.isFinal) {
+      // Show confirmation if the app was able to process the segment
+      window.postMessage({ type: "speechhandled", success: true }, "*")
+    }
+  }, [segment])
+```
+
 ## TranscriptDrawer component
 
-`<TranscriptDrawer/>` is an alternative to BigTranscript. It is drawer-style component that appears from the top of the viewport and to display real-time speech-to-text transcript and an usage hint like _Try "Show me blue jeans"_ to help users get started.
+`<TranscriptDrawer/>` is an alternative to BigTranscript, displaying speech-to-text transcript and a hint text. This drawer-style component automatically appears from the top of the window when the app is listening for voice input (`SpeechState.Recording`) and hides automatically.
 
-It is momentarily displayed and automatically hidden after the end of voice input.
+Set the `hint` property to show relevant hints for your audience at the time they are likely to need it.
 
   > 
-  > Use `<TranscriptDrawer/>` to display real-time speech-to-text transcript for better feedback
+  > Use `<TranscriptDrawer/>` to display both transcript _and_ and usage hints like _Try "New arrivals"_, _Try "What brands do you have?"_, _Try "I need t-shirts"_ ...
   > 
 
 ### Usage
@@ -177,7 +191,7 @@ Use the component instead of BigTranscript
 
 ```tsx
 <SpeechProvider appId="014ce3a6-9bbf-4605-976f-087a8f3ec178">
-  <TranscriptDrawer hint='Try "Show me blue jeans"'/>
+  <TranscriptDrawer hint='Try "Show me new arrivals"'/>
 
   <PushToTalkButtonContainer>
     <PushToTalkButton captureKey=" " />
