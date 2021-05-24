@@ -163,7 +163,33 @@ It is momentarily displayed and automatically hidden after the end of voice inpu
   > Use `<TranscriptDrawer/>` to display real-time speech-to-text transcript for better feedback
   > 
 
-<h3>Properties</h3>
+### Usage
+
+Import the required components
+
+```tsx
+import {
+  TranscriptDrawer,
+} from "@speechly/react-ui/components/TranscriptDrawer";
+```
+
+Use the component instead of BigTranscript
+
+```tsx
+<SpeechProvider appId="014ce3a6-9bbf-4605-976f-087a8f3ec178">
+  <TranscriptDrawer hint='Try "Show me blue jeans"'/>
+
+  <PushToTalkButtonContainer>
+    <PushToTalkButton captureKey=" " />
+    <ErrorPanel/>
+  </PushToTalkButtonContainer>
+</SpeechProvider>
+```
+
+```
+
+### Properties
+
 <ul>
   <li><code>hint</code> - Hint text
   <li><code>height</code> - Optional minimum height as CSS string. Default: "8rem"</li>
