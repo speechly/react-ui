@@ -33,7 +33,6 @@ export type TranscriptDrawerProps = BigTranscriptProps & {
   smallTextColor?: string
 }
 
-
 /**
  * A React component that renders the transcript and entities received from Speechly SLU API.
  *
@@ -58,6 +57,6 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   }, [segment])
 
   return (
-    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
+    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
   )
 }
