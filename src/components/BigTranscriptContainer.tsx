@@ -31,6 +31,9 @@ const BigTranscriptContainerDiv = styled.div<{
   margin: ${(props) => props.margin};
   z-index: 50;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 
   color: #fff;
   font-size: 1.4rem;
