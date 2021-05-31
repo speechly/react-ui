@@ -53,13 +53,10 @@ export default function App() {
 
 function SpeechlyApp() {
   const { speechState, segment, toggleRecording } = useSpeechContext();
-  const [hintText, setHintText] = useState('Try "Hello world!"')
 
   useEffect(() => {
     if (segment?.isFinal) {
       window.postMessage({ type: "speechhandled", success: true }, "*")
-
-      setHintText('Try "Show me blue jeans"')
 
       PubSub.publish(SpeechlyUiEvents.Notification, {
         message: "Feedback notification test",
@@ -71,7 +68,7 @@ function SpeechlyApp() {
   return (
     <>
       <BigTranscriptContainer>
-        <TranscriptDrawer hint={hintText} formatText={false}/>
+        <TranscriptDrawer hint={['Try: "Hello World"', 'Try: "Show me blue jeans"']} formatText={false}/>
       </BigTranscriptContainer>
       <PushToTalkButtonContainer>
         <PushToTalkButton intro="Hold to use voice commands"/>

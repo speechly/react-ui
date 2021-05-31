@@ -203,7 +203,7 @@ Use the component instead of BigTranscript
 ### Properties
 
 <ul>
-  <li><code>hint</code> - Hint text
+  <li><code>hint</code> - Hint text to be shown when the app is listening for speech. Hint is hidden upon user speech is received. String or a string[]. If an array is provided, the next tip is automatically shown after an utterance. After all tips are shown, they will be shown again in random order. Default: ""
   <li><code>height</code> - Optional minimum height as CSS string. Default: "8rem"</li>
   <li><code>color</code> - Optional string (CSS color) for text. Default: "#ffffff"
   <li><code>smallTextColor</code> - Optional string (CSS color) for hint text. Default: "#ffffff70"

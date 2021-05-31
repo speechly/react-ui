@@ -20,9 +20,9 @@ declare global {
  */
 export type TranscriptDrawerProps = BigTranscriptProps & {
   /**
-   * Optional hint text
+   * Optional hint text or array
    */
-  hint?: string
+  hint?: string | string[]
   /**
    * Optional minimum height as CSS string. Default: "8rem"
    */
@@ -31,6 +31,10 @@ export type TranscriptDrawerProps = BigTranscriptProps & {
    * Optional string (CSS color) for hint text. Default: "#ffffff70"
    */
   smallTextColor?: string
+  /**
+   * Optional CSS string for hint text size. Default: "0.9rem"
+   */
+  hintFontSize?: string
 }
 
 /**
@@ -51,12 +55,12 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   }, [speechState])
 
   useEffect(() => {
-    if (refElement?.current !== undefined) {
+    if (refElement?.current !== undefined && segment) {
       refElement.current.speechsegment(segment)
     }
   }, [segment])
 
   return (
-    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={props.hint} height={props.height}></transcript-drawer>
+    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={JSON.stringify(props.hint)} height={props.height} hintfontsize={props.hintFontSize}></transcript-drawer>
   )
 }
