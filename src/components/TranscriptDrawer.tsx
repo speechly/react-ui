@@ -55,7 +55,7 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   }, [speechState])
 
   useEffect(() => {
-    if (refElement?.current !== undefined && segment) {
+    if (refElement?.current !== undefined && segment !== undefined) {
       refElement.current.speechsegment(segment)
     }
   }, [segment])

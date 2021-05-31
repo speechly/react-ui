@@ -64,13 +64,13 @@ export const BigTranscript: React.FC<BigTranscriptProps> = ({
 
   // Change button face according to Speechly states
   useEffect(() => {
-    if (refElement?.current !== undefined) {
+    if (refElement?.current !== undefined && speechState !== undefined) {
       refElement.current.speechstate(mapSpeechStateToClientState(speechState))
     }
   }, [speechState])
 
   useEffect(() => {
-    if (refElement?.current !== undefined) {
+    if (refElement?.current !== undefined && segment !== undefined) {
       refElement.current.speechsegment(segment)
     }
   }, [segment])

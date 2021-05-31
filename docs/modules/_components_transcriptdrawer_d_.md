@@ -18,7 +18,7 @@
 
 ### TranscriptDrawerProps
 
-Ƭ  **TranscriptDrawerProps**: [BigTranscriptProps](_components_bigtranscript_d_.md#bigtranscriptprops) & { height?: undefined \| string ; hint?: undefined \| string ; smallTextColor?: undefined \| string  }
+Ƭ  **TranscriptDrawerProps**: [BigTranscriptProps](_components_bigtranscript_d_.md#bigtranscriptprops) & { height?: undefined \| string ; hint?: string \| string[] ; hintFontSize?: undefined \| string ; smallTextColor?: undefined \| string  }
 
 *Defined in components/TranscriptDrawer.d.ts:16*
 
@@ -30,7 +30,7 @@ Properties for BigTranscript component.
 
 • `Const` **TranscriptDrawer**: React.FC\<[TranscriptDrawerProps](_components_transcriptdrawer_d_.md#transcriptdrawerprops)>
 
-*Defined in components/TranscriptDrawer.d.ts:37*
+*Defined in components/TranscriptDrawer.d.ts:41*
 
 A React component that renders the transcript and entities received from Speechly SLU API.
 
