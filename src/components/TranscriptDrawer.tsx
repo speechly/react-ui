@@ -38,7 +38,7 @@ export type TranscriptDrawerProps = BigTranscriptProps & {
   /**
    * Optional SpeechSegment to be displayed instead of actual transcription from API
    */
-  mockSegment: SpeechSegment | undefined
+  mockSegment?: SpeechSegment | undefined
 }
 
 /**
