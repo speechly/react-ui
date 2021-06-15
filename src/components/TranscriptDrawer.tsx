@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { useSpeechContext } from '@speechly/react-client'
+import React, { useEffect, useRef, useState } from 'react'
+import { SpeechSegment, useSpeechContext } from '@speechly/react-client'
 import { mapSpeechStateToClientState } from '../types'
 import { BigTranscriptProps } from './BigTranscript'
 import '@speechly/browser-ui/transcript-drawer'
@@ -35,6 +35,10 @@ export type TranscriptDrawerProps = BigTranscriptProps & {
    * Optional CSS string for hint text size. Default: "0.9rem"
    */
   hintFontSize?: string
+  /**
+   * Optional SpeechSegment to be displayed instead of actual transcription from API
+   */
+  mockSegment: SpeechSegment | undefined
 }
 
 /**
@@ -47,6 +51,7 @@ export type TranscriptDrawerProps = BigTranscriptProps & {
 export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
   const { segment, speechState } = useSpeechContext()
   const refElement = useRef<any>()
+  const [demoMode, setDemoMode] = useState(false)
 
   useEffect(() => {
     if (refElement?.current !== undefined) {
@@ -56,11 +61,19 @@ export const TranscriptDrawer: React.FC<TranscriptDrawerProps> = props => {
 
   useEffect(() => {
     if (refElement?.current !== undefined && segment !== undefined) {
+      setDemoMode(false)
       refElement.current.speechsegment(segment)
     }
   }, [segment])
 
+  useEffect(() => {
+    if (refElement?.current !== undefined && props.mockSegment !== undefined) {
+      setDemoMode(true)
+      refElement.current.speechsegment(props.mockSegment)
+    }
+  }, [props.mockSegment])
+
   return (
-    <transcript-drawer ref={refElement} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={JSON.stringify(props.hint)} height={props.height} hintfontsize={props.hintFontSize}></transcript-drawer>
+    <transcript-drawer ref={refElement} demomode={demoMode ? 'true' : 'false'} formattext={props.formatText === false ? 'false' : 'true'} fontsize={props.fontSize} color={props.color} smalltextcolor={props.smallTextColor} highlightcolor={props.highlightColor} backgroundcolor={props.backgroundColor} marginbottom={props.marginBottom} hint={JSON.stringify(props.hint)} height={props.height} hintfontsize={props.hintFontSize}></transcript-drawer>
   )
 }

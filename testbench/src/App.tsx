@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SpeechProvider, useSpeechContext } from "@speechly/react-client";
+import { startDemo, stopDemo } from "@speechly/browser-ui/demomode";
+import { SpeechProvider, SpeechSegment, useSpeechContext } from "@speechly/react-client";
 import {
 //  BigTranscript,
   BigTranscriptContainer,
@@ -10,7 +11,6 @@ import {
 //} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
 } from "./@speechly/react-ui";
-
 
 import {
   TranscriptDrawer,
@@ -53,6 +53,7 @@ export default function App() {
 
 function SpeechlyApp() {
   const { speechState, segment, toggleRecording } = useSpeechContext();
+  const [mockSegment, setMockSegment] = useState<SpeechSegment | undefined>();
 
   useEffect(() => {
     if (segment?.isFinal) {
@@ -65,10 +66,28 @@ function SpeechlyApp() {
     }
   }, [segment])
 
+  const clickStartDemo = () => {
+    const demoStrings = [
+      "*filter show me blue(color) jeans(product)",
+      "*clear clear",
+    ]
+
+    startDemo(demoStrings, (s: SpeechSegment) => {
+      setMockSegment(s);
+      if (s.isFinal) {
+        window.postMessage({ type: "speechhandled", success: true }, "*")
+      }
+    });
+  }
+
+  const clickStopDemo = () => {
+    stopDemo();
+  }
+
   return (
     <>
       <BigTranscriptContainer>
-        <TranscriptDrawer hint={['Try: "Hello World"', 'Try: "Show me blue jeans"']} formatText={false}/>
+        <TranscriptDrawer mockSegment={mockSegment} hint={['Try: "Hello World"', 'Try: "Show me blue jeans"']} formatText={false}/>
       </BigTranscriptContainer>
       <PushToTalkButtonContainer>
         <PushToTalkButton intro="Hold to use voice commands"/>
@@ -83,6 +102,8 @@ function SpeechlyApp() {
       ) : null}
       <div className="mic-button">
         <button onClick={toggleRecording}>Record</button>
+        <button onClick={clickStartDemo}>Start demo</button>
+        <button onClick={clickStopDemo}>Stop demo</button>
       </div>
     </>
   );

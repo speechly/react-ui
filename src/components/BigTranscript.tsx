@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { useSpeechContext } from '@speechly/react-client'
+import React, { useEffect, useRef, useState } from 'react'
+import { SpeechSegment, useSpeechContext } from '@speechly/react-client'
 import { mapSpeechStateToClientState } from '../types'
 import '@speechly/browser-ui/big-transcript'
 
@@ -42,6 +42,10 @@ export type BigTranscriptProps = {
    * Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem"
    */
   marginBottom?: string
+  /**
+   * Optional SpeechSegment to be displayed instead of actual transcription from API
+   */
+  mockSegment: SpeechSegment | undefined
 }
 
 /**
@@ -58,9 +62,11 @@ export const BigTranscript: React.FC<BigTranscriptProps> = ({
   highlightColor,
   backgroundColor,
   marginBottom = '2rem',
+  mockSegment,
 }) => {
   const { segment, speechState } = useSpeechContext()
   const refElement = useRef<any>()
+  const [demoMode, setDemoMode] = useState(false)
 
   // Change button face according to Speechly states
   useEffect(() => {
@@ -71,11 +77,19 @@ export const BigTranscript: React.FC<BigTranscriptProps> = ({
 
   useEffect(() => {
     if (refElement?.current !== undefined && segment !== undefined) {
+      setDemoMode(false)
       refElement.current.speechsegment(segment)
     }
   }, [segment])
 
+  useEffect(() => {
+    if (refElement?.current !== undefined && mockSegment !== undefined) {
+      setDemoMode(true)
+      refElement.current.speechsegment(mockSegment)
+    }
+  }, [mockSegment])
+
   return (
-    <big-transcript ref={refElement} formattext={(formatText !== null && formatText === false) ? 'false' : 'true'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
+    <big-transcript ref={refElement} demomode={demoMode ? 'true' : 'false'} formattext={(formatText !== null && formatText === false) ? 'false' : 'true'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
   )
 }
