@@ -7,7 +7,6 @@ import {
   PushToTalkButton,
   PushToTalkButtonContainer,
   ErrorPanel,
-  BigTranscript,
 //} from "@speechly/react-ui";
 // Run `sh initialize.sh` in the parent directory and uncomment this import to use local linked code.
 } from "./@speechly/react-ui";
@@ -89,8 +88,8 @@ function SpeechlyApp() {
       <BigTranscriptContainer>
         <TranscriptDrawer mockSegment={mockSegment} hint={['Try: "Hello World"', 'Try: "Show me blue jeans"']} formatText={false}/>
       </BigTranscriptContainer>
-      <PushToTalkButtonContainer>
-        <PushToTalkButton intro="Hold to use voice commands"/>
+      <PushToTalkButtonContainer size="6rem" voffset="2rem">
+        <PushToTalkButton size="6rem" intro="Hold to use voice commands"/>
         <ErrorPanel/>
       </PushToTalkButtonContainer>
 

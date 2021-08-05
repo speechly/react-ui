@@ -1,11 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const PushToTalkContainerDiv = styled.div`
-  width: 100vw;
-  height: 9.2rem;
+/**
+ * Properties for BigTranscriptContainer component.
+ *
+ * @public
+ */
+export type PushToTalkContainerProps = {
+  /**
+   * Optional string (CSS). Defines the button frame width and height. Default: "6rem"
+   */
+  size?: string
+
+  /**
+   * Optional CSS string. Vertical distance from viewport edge. Default: "3rem"
+   */
+  voffset?: string
+}
+
+const PushToTalkContainerDiv = styled.div<{
+  size: string
+  voffset: string
+}>`
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(${(props) => props.size} + ${(props) => props.voffset});
+  max-height: 100vh;
   pointer-events: none;
 
   display: flex;
@@ -27,6 +49,10 @@ const PushToTalkContainerDiv = styled.div`
  *
  * @public
  */
-export const PushToTalkButtonContainer: React.FC = props => {
-  return <PushToTalkContainerDiv>{props.children}</PushToTalkContainerDiv>
+export const PushToTalkButtonContainer: React.FC<PushToTalkContainerProps> = ({
+  size = '6rem',
+  voffset = '3rem',
+  children,
+}) => {
+  return <PushToTalkContainerDiv size={size} voffset={voffset}>{children}</PushToTalkContainerDiv>
 }
