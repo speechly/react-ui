@@ -31,10 +31,10 @@
     "url": "https://github.com/speechly/react-ui/issues"
   },
   "devDependencies": {
-    "@speechly/react-client": "0.0.20",
+    "@speechly/react-client": "^0.0.20",
     "@types/pubsub-js": "^1.8.1",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "@types/react": ">=16.13.1",
+    "@types/react-dom": ">=16.13.1",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
@@ -49,8 +49,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-tsdoc": "^0.2.7",
     "prettier": "^2.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1",
     "ts-loader": "^8.0.11",
     "tsc-watch": "^4.2.9",
     "typedoc": "^0.19.2",
@@ -60,12 +60,12 @@
     "webpack-cli": "^4.2.0"
   },
   "peerDependencies": {
-    "@speechly/react-client": "^0.0.20",
-    "react": "^16.13.1 || ^17.0.0",
-    "react-dom": "^16.13.1 || ^17.0.0"
+    "@speechly/react-client": ">=0.0.20",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   },
   "dependencies": {
-    "@speechly/browser-ui": "^3.13.0",
+    "@speechly/browser-ui": ">=3.13.0",
     "pubsub-js": "^1.9.2",
     "react-spring": "^8.0.27",
     "styled-components": "^5.2.1"
