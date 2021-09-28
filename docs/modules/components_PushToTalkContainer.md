@@ -29,7 +29,7 @@ Properties for BigTranscriptContainer component.
 
 #### Defined in
 
-[components/PushToTalkContainer.tsx:9](https://github.com/speechly/react-ui/blob/3a22711/src/components/PushToTalkContainer.tsx#L9)
+[components/PushToTalkContainer.tsx:9](https://github.com/speechly/react-ui/blob/b0ff445/src/components/PushToTalkContainer.tsx#L9)
 
 ## Variables
 
@@ -49,4 +49,4 @@ And then you can use CSS for styling the layout.
 
 #### Defined in
 
-[components/PushToTalkContainer.tsx:52](https://github.com/speechly/react-ui/blob/3a22711/src/components/PushToTalkContainer.tsx#L52)
+[components/PushToTalkContainer.tsx:52](https://github.com/speechly/react-ui/blob/b0ff445/src/components/PushToTalkContainer.tsx#L52)

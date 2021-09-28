@@ -18,7 +18,7 @@ declare global {
  *
  * @public
  */
-export type TranscriptDrawerProps = BigTranscriptProps & {
+export interface TranscriptDrawerProps extends BigTranscriptProps {
   /**
    * Optional hint text or array
    */

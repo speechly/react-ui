@@ -29,7 +29,7 @@ Properties for BigTranscriptContainer component.
 
 #### Defined in
 
-[components/BigTranscriptContainer.tsx:10](https://github.com/speechly/react-ui/blob/3a22711/src/components/BigTranscriptContainer.tsx#L10)
+[components/BigTranscriptContainer.tsx:10](https://github.com/speechly/react-ui/blob/b0ff445/src/components/BigTranscriptContainer.tsx#L10)
 
 ## Variables
 
@@ -49,4 +49,4 @@ And then you can use CSS for styling the layout.
 
 #### Defined in
 
-[components/BigTranscriptContainer.tsx:56](https://github.com/speechly/react-ui/blob/3a22711/src/components/BigTranscriptContainer.tsx#L56)
+[components/BigTranscriptContainer.tsx:56](https://github.com/speechly/react-ui/blob/b0ff445/src/components/BigTranscriptContainer.tsx#L56)

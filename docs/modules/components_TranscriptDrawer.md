@@ -4,31 +4,19 @@
 
 ## Table of contents
 
-### Type aliases
+### Interfaces
 
-- [TranscriptDrawerProps](components_TranscriptDrawer.md#transcriptdrawerprops)
+- [TranscriptDrawerProps](../interfaces/components_TranscriptDrawer.TranscriptDrawerProps.md)
 
 ### Variables
 
 - [TranscriptDrawer](components_TranscriptDrawer.md#transcriptdrawer)
 
-## Type aliases
-
-### TranscriptDrawerProps
-
-Ƭ **TranscriptDrawerProps**: [`BigTranscriptProps`](components_BigTranscript.md#bigtranscriptprops) & { `height?`: `string` ; `hint?`: `string` \| `string`[] ; `hintFontSize?`: `string` ; `mockSegment?`: `SpeechSegment` ; `smallTextColor?`: `string`  }
-
-Properties for BigTranscript component.
-
-#### Defined in
-
-[components/TranscriptDrawer.tsx:21](https://github.com/speechly/react-ui/blob/3a22711/src/components/TranscriptDrawer.tsx#L21)
-
 ## Variables
 
 ### TranscriptDrawer
 
-• **TranscriptDrawer**: `React.FC`<[`TranscriptDrawerProps`](components_TranscriptDrawer.md#transcriptdrawerprops)\>
+• **TranscriptDrawer**: `React.FC`<[`TranscriptDrawerProps`](../interfaces/components_TranscriptDrawer.TranscriptDrawerProps.md)\>
 
 A React component that renders the transcript and entities received from Speechly SLU API.
 
@@ -36,4 +24,4 @@ The component is intended to be used for providing visual feedback to the speake
 
 #### Defined in
 
-[components/TranscriptDrawer.tsx:51](https://github.com/speechly/react-ui/blob/3a22711/src/components/TranscriptDrawer.tsx#L51)
+[components/TranscriptDrawer.tsx:51](https://github.com/speechly/react-ui/blob/b0ff445/src/components/TranscriptDrawer.tsx#L51)
