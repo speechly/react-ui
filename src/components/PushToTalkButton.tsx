@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { SpeechState, useSpeechContext } from '@speechly/react-client'
 import PubSub from 'pubsub-js'
-import { SpeechlyUiEvents } from '../types'
+import { mapSpeechStateToClientState, SpeechlyUiEvents } from '../types'
 import '@speechly/browser-ui/holdable-button'
 import '@speechly/browser-ui/call-out'
+import { PushToTalkButtonContainer } from '..'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -24,20 +25,18 @@ declare global {
  */
 export type PushToTalkButtonProps = {
   /**
-   * Optional boolean. Shows poweron state. If false, recording can immediately start but will first press will cause a system permission prompt. Default: false
+   * Optional "bottom" string turns on internal placement without any CSS positioning.
    */
-  powerOn?: boolean
+  placement?: string
   /**
    * Keyboard key to use for controlling the button.
    * Passing e.g. ` ` (a spacebar) will mean that holding down the spacebar key will key the button pressed.
    */
   captureKey?: string
-
   /**
    * The size of the button, as CSS (e.g. `5rem`).
    */
   size?: string
-
   /**
    * Colours of the gradient around the button.
    * Valid input is an array of two hex colour codes, e.g. `['#fff', '#000']`.
@@ -71,6 +70,10 @@ export type PushToTalkButtonProps = {
    * Optional string (CSS color) for hint text background. Default: "#202020"
    */
   backgroundColor?: string
+  /**
+   * Optional boolean. Shows poweron state. If false, recording can immediately start but will first press will cause a system permission prompt. Default: false
+   */
+  powerOn?: boolean
 }
 
 /**
@@ -93,6 +96,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
   showTime,
   textColor,
   backgroundColor,
+  placement,
 }) => {
   const { speechState, toggleRecording, initialise } = useSpeechContext()
   const [icon, setIcon] = useState<string>((powerOn ? SpeechState.Idle : SpeechState.Ready) as string)
@@ -136,7 +140,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   const tangentPressAction = (): void => {
     PubSub.publish(SpeechlyUiEvents.TangentPress, { state: speechStateRef.current })
-    window.postMessage({ type: 'holdstart' }, '*')
+    window.postMessage({ type: 'holdstart', state: mapSpeechStateToClientState(speechStateRef.current || SpeechState.Idle) }, '*')
     setShowHint(false)
 
     switch (speechStateRef.current) {
@@ -182,8 +186,18 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   return (
     <div>
-      <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'}></holdable-button>
-      <call-out show={showHint && hintText !== ''} fontsize={fontSize} textcolor={textColor} backgroundcolor={backgroundColor} showtime={showTime}>{hintText}</call-out>
+      { (placement === "bottom") && (
+        <PushToTalkButtonContainer>
+          <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'}></holdable-button>
+          <call-out show={showHint && hintText !== ''} fontsize={fontSize} textcolor={textColor} backgroundcolor={backgroundColor} showtime={showTime}>{hintText}</call-out>
+        </PushToTalkButtonContainer>
+      )}
+      { (placement !== "bottom") && (
+        <>
+          <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'}></holdable-button>
+          <call-out show={showHint && hintText !== ''} fontsize={fontSize} textcolor={textColor} backgroundcolor={backgroundColor} showtime={showTime}>{hintText}</call-out>
+        </>
+      )}
     </div>
   )
 }

@@ -88,10 +88,10 @@ function SpeechlyApp() {
       <BigTranscriptContainer>
         <TranscriptDrawer mockSegment={mockSegment} hint={['Try: "Hello World"', 'Try: "Show me blue jeans"']} formatText={false}/>
       </BigTranscriptContainer>
-      <PushToTalkButtonContainer size="6rem" voffset="2rem">
-        <PushToTalkButton size="6rem" intro="Hold to use voice commands"/>
-        <ErrorPanel/>
-      </PushToTalkButtonContainer>
+
+      <PushToTalkButton placement="bottom" size="6rem" intro="Hold to use voice commands"/>
+
+      <ErrorPanel placement="bottom" />
 
       <div className="status">{speechState}</div>
       {segment ? (

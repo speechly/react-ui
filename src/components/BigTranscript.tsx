@@ -19,6 +19,10 @@ declare global {
  */
 export type BigTranscriptProps = {
   /**
+   * Optional "top" string turns on internal placement without any CSS positioning.
+   */
+  placement?: string
+  /**
    * Optional boolean. If true, transcript is formatted with detected entities, e.g. numbers. Default: true
    */
   formatText?: boolean
@@ -56,6 +60,7 @@ export type BigTranscriptProps = {
  * @public
  */
 export const BigTranscript: React.FC<BigTranscriptProps> = ({
+  placement = 'top',
   formatText,
   fontSize,
   color,
@@ -90,6 +95,6 @@ export const BigTranscript: React.FC<BigTranscriptProps> = ({
   }, [mockSegment])
 
   return (
-    <big-transcript ref={refElement} demomode={demoMode ? 'true' : 'false'} formattext={(formatText !== null && formatText === false) ? 'false' : 'true'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
+    <big-transcript ref={refElement} placement={placement} demomode={demoMode ? 'true' : 'false'} formattext={(formatText !== null && formatText === false) ? 'false' : 'true'} fontsize={fontSize} color={color} highlightcolor={highlightColor} backgroundcolor={backgroundColor} marginbottom={marginBottom}></big-transcript>
   )
 }
