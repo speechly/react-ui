@@ -39,7 +39,7 @@ Properties for PushToTalkButton component.
 
 #### Defined in
 
-[components/PushToTalkButton.tsx:26](https://github.com/speechly/react-ui/blob/bb575c3/src/components/PushToTalkButton.tsx#L26)
+[components/PushToTalkButton.tsx:26](https://github.com/speechly/react-ui/blob/3a22711/src/components/PushToTalkButton.tsx#L26)
 
 ## Variables
 
@@ -53,4 +53,4 @@ Make sure to place this component inside your `SpeechProvider` component importe
 
 #### Defined in
 
-[components/PushToTalkButton.tsx:87](https://github.com/speechly/react-ui/blob/bb575c3/src/components/PushToTalkButton.tsx#L87)
+[components/PushToTalkButton.tsx:87](https://github.com/speechly/react-ui/blob/3a22711/src/components/PushToTalkButton.tsx#L87)

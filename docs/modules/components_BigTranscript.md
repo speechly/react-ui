@@ -35,7 +35,7 @@ Properties for BigTranscript component.
 
 #### Defined in
 
-[components/BigTranscript.tsx:20](https://github.com/speechly/react-ui/blob/bb575c3/src/components/BigTranscript.tsx#L20)
+[components/BigTranscript.tsx:20](https://github.com/speechly/react-ui/blob/3a22711/src/components/BigTranscript.tsx#L20)
 
 ## Variables
 
@@ -49,4 +49,4 @@ The component is intended to be used for providing visual feedback to the speake
 
 #### Defined in
 
-[components/BigTranscript.tsx:62](https://github.com/speechly/react-ui/blob/bb575c3/src/components/BigTranscript.tsx#L62)
+[components/BigTranscript.tsx:62](https://github.com/speechly/react-ui/blob/3a22711/src/components/BigTranscript.tsx#L62)
