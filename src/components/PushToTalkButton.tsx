@@ -140,7 +140,7 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   const tangentPressAction = (): void => {
     PubSub.publish(SpeechlyUiEvents.TangentPress, { state: speechStateRef.current })
-    window.postMessage({ type: 'holdstart', state: mapSpeechStateToClientState(speechStateRef.current || SpeechState.Idle) }, '*')
+    window.postMessage({ type: 'holdstart', state: mapSpeechStateToClientState(speechStateRef.current !== undefined ? speechStateRef.current : SpeechState.Idle) }, '*')
     setShowHint(false)
 
     switch (speechStateRef.current) {
@@ -186,13 +186,13 @@ export const PushToTalkButton: React.FC<PushToTalkButtonProps> = ({
 
   return (
     <div>
-      { (placement === "bottom") && (
+      { (placement === 'bottom') && (
         <PushToTalkButtonContainer>
           <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'}></holdable-button>
           <call-out show={showHint && hintText !== ''} fontsize={fontSize} textcolor={textColor} backgroundcolor={backgroundColor} showtime={showTime}>{hintText}</call-out>
         </PushToTalkButtonContainer>
       )}
-      { (placement !== "bottom") && (
+      { (placement !== 'bottom') && (
         <>
           <holdable-button ref={buttonRef} poweron={powerOn} capturekey={captureKey} icon={icon} size={size} gradientstop1={gradientStops[0]} gradientstop2={gradientStops[1]} hide={hide ? 'true' : 'false'}></holdable-button>
           <call-out show={showHint && hintText !== ''} fontsize={fontSize} textcolor={textColor} backgroundcolor={backgroundColor} showtime={showTime}>{hintText}</call-out>

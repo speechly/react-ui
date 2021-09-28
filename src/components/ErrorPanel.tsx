@@ -33,7 +33,7 @@ export type ErrorPanelProps = {
  * @public
  */
 export const ErrorPanel: React.FC<ErrorPanelProps> = ({
-  placement = "bottom",
+  placement = 'bottom',
 }) => {
   return (
     <error-panel placement={placement}></error-panel>
