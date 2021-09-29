@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[components/Notifications.tsx:8](https://github.com/speechly/react-ui/blob/b0ff445/src/components/Notifications.tsx#L8)
+[components/Notifications.tsx:8](https://github.com/speechly/react-ui/blob/0e8081b/src/components/Notifications.tsx#L8)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[components/Notifications.tsx:9](https://github.com/speechly/react-ui/blob/b0ff445/src/components/Notifications.tsx#L9)
+[components/Notifications.tsx:9](https://github.com/speechly/react-ui/blob/0e8081b/src/components/Notifications.tsx#L9)

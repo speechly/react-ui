@@ -17,7 +17,7 @@ declare global {
  *
  * @public
  */
-export interface BigTranscriptProps {
+export type BigTranscriptProps = {
   /**
    * Optional "top" string turns on internal placement without any CSS positioning.
    */

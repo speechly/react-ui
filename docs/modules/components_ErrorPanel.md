@@ -28,7 +28,7 @@ Properties for BigTranscript component.
 
 #### Defined in
 
-[components/ErrorPanel.tsx:18](https://github.com/speechly/react-ui/blob/b0ff445/src/components/ErrorPanel.tsx#L18)
+[components/ErrorPanel.tsx:18](https://github.com/speechly/react-ui/blob/0e8081b/src/components/ErrorPanel.tsx#L18)
 
 ## Variables
 
@@ -45,4 +45,4 @@ It is intented to be displayed at the lower part of the screen like so:
 
 #### Defined in
 
-[components/ErrorPanel.tsx:35](https://github.com/speechly/react-ui/blob/b0ff445/src/components/ErrorPanel.tsx#L35)
+[components/ErrorPanel.tsx:35](https://github.com/speechly/react-ui/blob/0e8081b/src/components/ErrorPanel.tsx#L35)

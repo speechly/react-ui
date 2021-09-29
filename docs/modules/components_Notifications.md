@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[components/Notifications.tsx:12](https://github.com/speechly/react-ui/blob/b0ff445/src/components/Notifications.tsx#L12)
+[components/Notifications.tsx:12](https://github.com/speechly/react-ui/blob/0e8081b/src/components/Notifications.tsx#L12)
 
 ## Variables
 
@@ -44,4 +44,4 @@
 
 #### Defined in
 
-[components/Notifications.tsx:22](https://github.com/speechly/react-ui/blob/b0ff445/src/components/Notifications.tsx#L22)
+[components/Notifications.tsx:22](https://github.com/speechly/react-ui/blob/0e8081b/src/components/Notifications.tsx#L22)
