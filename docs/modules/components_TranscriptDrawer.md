@@ -33,13 +33,13 @@ Properties for BigTranscript component.
 | `hint?` | `string` \| `string`[] | Optional hint text or array |
 | `hintFontSize?` | `string` | Optional CSS string for hint text size. Default: "0.9rem" |
 | `marginBottom?` | `string` | Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem" |
-| `mockSegment?` | `SpeechSegment` | Optional SpeechSegment to be displayed instead of actual transcription from API. Can be used to demonstrate component function to user. |
+| `mockSegment?` | `SpeechSegment` | Optional SpeechSegment to be displayed instead of actual transcription from API. Can be used to demonstrate voice functionality to the user. |
 | `placement?` | `string` | Optional "top" string turns on internal placement without any CSS positioning. |
 | `smallTextColor?` | `string` | Optional string (CSS color) for hint text. Default: "#ffffff70" |
 
 #### Defined in
 
-[components/TranscriptDrawer.tsx:20](https://github.com/speechly/react-ui/blob/0e8081b/src/components/TranscriptDrawer.tsx#L20)
+[components/TranscriptDrawer.tsx:20](https://github.com/speechly/react-ui/blob/e631dfa/src/components/TranscriptDrawer.tsx#L20)
 
 ## Variables
 
@@ -53,4 +53,4 @@ The component is intended to be used for providing visual feedback to the speake
 
 #### Defined in
 
-[components/TranscriptDrawer.tsx:78](https://github.com/speechly/react-ui/blob/0e8081b/src/components/TranscriptDrawer.tsx#L78)
+[components/TranscriptDrawer.tsx:78](https://github.com/speechly/react-ui/blob/e631dfa/src/components/TranscriptDrawer.tsx#L78)

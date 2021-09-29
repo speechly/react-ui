@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[hooks/useKeyboardEvent.ts:3](https://github.com/speechly/react-ui/blob/0e8081b/src/hooks/useKeyboardEvent.ts#L3)
+[hooks/useKeyboardEvent.ts:3](https://github.com/speechly/react-ui/blob/e631dfa/src/hooks/useKeyboardEvent.ts#L3)
 
 ## Functions
 
@@ -56,4 +56,4 @@
 
 #### Defined in
 
-[hooks/useKeyboardEvent.ts:5](https://github.com/speechly/react-ui/blob/0e8081b/src/hooks/useKeyboardEvent.ts#L5)
+[hooks/useKeyboardEvent.ts:5](https://github.com/speechly/react-ui/blob/e631dfa/src/hooks/useKeyboardEvent.ts#L5)

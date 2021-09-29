@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[components/Info.tsx:12](https://github.com/speechly/react-ui/blob/0e8081b/src/components/Info.tsx#L12)
+[components/Info.tsx:12](https://github.com/speechly/react-ui/blob/e631dfa/src/components/Info.tsx#L12)

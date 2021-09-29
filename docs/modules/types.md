@@ -30,4 +30,4 @@
 
 #### Defined in
 
-[types.ts:12](https://github.com/speechly/react-ui/blob/0e8081b/src/types.ts#L12)
+[types.ts:12](https://github.com/speechly/react-ui/blob/e631dfa/src/types.ts#L12)

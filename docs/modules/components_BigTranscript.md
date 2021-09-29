@@ -30,12 +30,12 @@ Properties for BigTranscript component.
 | `formatText?` | `boolean` | Optional boolean. If true, transcript is formatted with detected entities, e.g. numbers. Default: true |
 | `highlightColor?` | `string` | Optional string (CSS color) for entity highlighting, vu meter and acknowledged icon. Default: "#15e8b5" |
 | `marginBottom?` | `string` | Optional string (CSS dimension). Dynamic margin added when element is visible. Default: "0rem" |
-| `mockSegment?` | `SpeechSegment` | Optional SpeechSegment to be displayed instead of actual transcription from API |
+| `mockSegment?` | `SpeechSegment` | Optional SpeechSegment to be displayed instead of actual transcription from API. Can be used to demonstrate voice functionality to the user. |
 | `placement?` | `string` | Optional "top" string turns on internal placement without any CSS positioning. |
 
 #### Defined in
 
-[components/BigTranscript.tsx:20](https://github.com/speechly/react-ui/blob/0e8081b/src/components/BigTranscript.tsx#L20)
+[components/BigTranscript.tsx:20](https://github.com/speechly/react-ui/blob/e631dfa/src/components/BigTranscript.tsx#L20)
 
 ## Variables
 
@@ -49,4 +49,4 @@ The component is intended to be used for providing visual feedback to the speake
 
 #### Defined in
 
-[components/BigTranscript.tsx:62](https://github.com/speechly/react-ui/blob/0e8081b/src/components/BigTranscript.tsx#L62)
+[components/BigTranscript.tsx:62](https://github.com/speechly/react-ui/blob/e631dfa/src/components/BigTranscript.tsx#L62)
