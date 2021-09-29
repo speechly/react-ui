@@ -47,7 +47,7 @@ export type TranscriptDrawerProps = {
    */
   marginBottom?: string
   /**
-   * Optional SpeechSegment to be displayed instead of actual transcription from API. Can be used to demonstrate component function to user.
+   * Optional SpeechSegment to be displayed instead of actual transcription from API. Can be used to demonstrate voice functionality to the user.
    */
   mockSegment?: SpeechSegment | undefined
   /**
